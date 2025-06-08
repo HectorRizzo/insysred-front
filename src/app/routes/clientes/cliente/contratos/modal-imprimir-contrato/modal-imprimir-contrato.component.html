@@ -1,0 +1,186 @@
+<mat-card>
+
+  <mat-card-header>
+    <div class="d-flex w-full justify-content-end">
+      <button (click)="cerrarPrevisualizacion()">X</button>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+
+
+      <div id="page1">
+
+        <div class="row justify-content-center ">
+          <div class="col-12 p-0">
+            <img class="w-full" [src]="urlCabecera" alt="cabecera_reporte">
+          </div>
+        </div>
+
+        <div class="m-0" style="padding: 15px 20px !important;">
+          <h2>DATOS DEL CLIENTE</h2>
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <p><span>Empresa:</span> </p>
+              <p><span>Nombre:</span> {{ cliente.nombres | titlecase }} {{ cliente.apellidos | titlecase }}</p>
+              <p><span>Dirección:</span> </p>
+              <p><span>Teléfonos:</span> </p>
+              <p><span>Cantón:</span> </p>
+            </div>
+            <div class="col-6">
+              <p><span>RUC/CI:</span>{{ cliente.identificacion }}</p>
+              <p><span>Dirección:</span></p>
+              <p><span>Correo:</span></p>
+              <p><span>Provincia:</span></p>
+            </div>
+          </div>
+          <h2>REFERENCIA PERSONAL</h2>
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <p><span>Nombre:</span> </p>
+              <p><span>Dirección:</span> </p>
+              <p><span>Teléfonos:</span> </p>
+            </div>
+            <div class="col-6">
+              <p><span>Parentesco:</span> </p>
+              <p><span>Ciudad:</span></p>
+              <p><span>Correo:</span> </p>
+            </div>
+          </div>
+        </div>
+
+          <div class="row m-0 p-2">
+
+            <p style="text-align: center; font-weight: bold; width: 100%;">
+              CONTRATO DE PRESTACIÓN DE SERVICIOS DE VALOR AGREGADO DE ACCESO A INTERNET No. 000181
+            </p>
+
+            <p style="padding-left: 9pt;text-indent: 0pt;line-height: 137%;text-align: justify;">
+              Intervienen en la celebración del presente contrato de prestación de servicios, por una parte el señor JACOBO HIPOLITO CHANCAY CEPEDA, en su calidad de Gerente General de <b>INSYSRED S.A.</b>,  a  quien  podrá  denominarse  simplemente  como  &quot;EL  PERMISIONARIO&quot;,  &quot;EL PROVEEDOR&quot; o &quot;INSYSRED S.A.&quot;, y por otra parte {{ cliente.nombres | uppercase }}, (si es persona jurídica) representada por ALEX VIDAL MORAN VERGARA, con número de cédula/RUC {{ cliente.identificacion }}, con email {{ cliente.email || '__' }}, domiciliado en {{ cliente.ubicacion || '__' }} cantón {{ cliente.canton || '__' }}, provincia {{ cliente.provincia || '__' }}, a quien podrá denominarse simplemente como &quot;EL CLIENTE&quot;, quienes de manera libre y por mutuo acuerdo y voluntariamente celebran el presente contrato de prestación de servicios contenido en las siguientes cláusulas:
+            </p>
+
+            <div style="padding-left: 9pt;line-height: 137%; text-align: justify;">
+
+              <h2>PRIMERA.- ANTECEDENTES.-</h2>
+              <p>
+                El PROVEEDOR se encuentra autorizado para prestar Servicios de Valor Agregado de Acceso a Internet de acuerdo a la Resolución No. 362-08-CONATEL-2011 del 28 de abril de  2011 y el    Permiso para la Prestación de Servicios de Valor Agregado de fecha 28 de junio de 2011 inscrito en el Tomo 93 a Fojas 9329 del Registro Público de Telecomunicaciones, en la misma fecha.
+              </p>
+
+              <h2>SEGUNDA.- OBJETO, CARACTERISTICAS.-</h2>
+
+              <p>
+                El presente contrato tiene por objeto que EL PROVEEDOR proporcione a EL CLIENTE el acceso a la red internet conforme a las características pactadas, que se describen en los Anexos Técnico y Comercial que debidamente firmados por las partes, son integrantes de este instrumento. Las partes aceptan que este instrumento constituya un contrato marco general, y que, en adelante los servicios, cambios en los servicios, y cualquier otra modificación que se implemente; se realizará mediante la suscripción de nuevos Anexos Técnico (s) y Comercial (es) correspondientes, que debidamente firmados por las partes, serán integrantes de este Contrato, que se seguirán las condiciones generales de este instrumento con las especificaciones de los respectivos Anexos que suscriban las partes. EL PROVEEDOR guardará cronológicamente, para efectos de prueba, los Anexos que llegaren a suscribirse entre las partes.
+              </p>
+
+              <h2>TERCERA.- PRECIO Y FORMA DE PAGO.-</h2>
+              <p>
+                a) El precio acordado por la instalación y puesta en funcionamiento por el Servicio de Acceso a Internet es el que consta en el ANEXO 2 (comercial), y que firmado por las partes, es integrante del presente contrato. b) El precio mensual acordado por la prestación del Servicio de Acceso a Internet, es el que corresponde al Plan contratado, y cuyo valor mensual y descripción consta en el ANEXO 2 (Comercial), que debidamente firmado por las partes, es integrante del presente contrato. c) El Plan contratado se pagará en mensualidades, pagaderas por el CLIENTE a EL PROVEEDOR por mes adelantado, dentro de los 5 días primeros días de cada mes calendario; previo la entrega de la factura por el servicio contratado. En caso que, el CLIENTE no cancele los valores hasta el vigésimo día dentro del mes calendario que se encuentre en curso, EL PROVEEDOR tiene la facultad de suspender la prestación del servicio en cualquier momento, de no producirse el pago del plan dentro del plazo antes señalado, sin que implique terminación de contrato. En los casos que corresponda, se cobrarán los rubros antes indicados y la mensualidad en lo proporcional del mes de facturación en curso. EL PROVEEDOR respetará la intervención de operadores de servicios finales o de servicio portador para el acceso de sus abonados; no está permitida la creación o levantamiento de redes de acceso directas a sus abonados; salvo obtención del contrato habilitante (reventa) para incluir en un solo rubro mensual el cobro de los servicios en los planes de acceso a Internet que ofrezca. En este último caso el PERMISIONARIO presentará, el contrato de reventa debidamente registrado en la SENATEL, tanto al organismo técnico de control en caso de inspección, o al abonado que así lo requiera.
+              </p>
+            </div>
+
+          </div>
+      </div>
+  
+      <div id="page2">
+        <div class="row m-0 p-2">
+          <div style="padding-left: 9pt;line-height: 137%; text-align: justify;">
+            <h2>CUARTA.- DERECHOS DEL CLIENTE.-</h2>
+            <p>
+              1.- A recibir el servicio de acuerdo a los términos estipulados en el presente contrato. 2.- A un reconocimiento económico que corresponda al tiempo que el servicio no ha estado disponible, cuando la causa fuese imputable al prestador del servicio. 3.- A que no se varíe el precio estipulado en el contrato o sus Anexos, mientras dure la vigencia del mismo o no se cambien las condiciones de la prestación a través de la suscripción de nuevos Anexos Técnico (s) y Comercial (es). 4.- A reclamar respecto de la calidad del servicio, cobros no contratados, elevaciones de tarifas, irregularidades en relación a la prestación del servicio ante la Defensoría del Pueblo y/o Superintendencia de Telecomunicaciones. 5.- A reclamar de manera integral por los problemas de calidad tanto del Acceso a la Red Internet, así como por las deficiencias en el enlace provisto para brindar el servicio. En particular en los casos en que aparezca EL PROVEEDOR como revendedor del servicio portador. En este último caso, responderá EL PROVEEDOR plenamente a su abonado conforme a la Ley Orgánica de Defensa del Consumidor, (independientemente de los acuerdos existentes entre los operadores o las responsabilidades ante las autoridades de telecomunicaciones). 6.- EL PROVEEDOR reconoce a sus clientes todos los derechos que se encuentran determinados en la Ley Orgánica de Defensa del Consumidor y su Reglamento; el Reglamento para la prestación del Servicios de Valor Agregado y la Resolución No. 216-09-CONATEL-2009.
+            </p>
+  
+            <h2>QUINTA: PLAZO DE VIGENCIA.- </h2>
+            <p>
+              El presente contrato, tendrá un plazo de vigencia de 12 meses, contados a partir de la fecha de suscripción del mismo. En caso que, ninguna de las partes, notifique su deseo de dar por terminado el contrato, con 30 días de anticipación a la fecha de su vencimiento, se renovará automáticamente, así como de manera sucesiva, en iguales términos y condiciones que se encontraren vigentes.
+            </p>
+  
+            <h2>SEXTA: CALIDAD DEL SERVICIO.- </h2>
+            <p>
+              EL PROVEEDOR cumplirá los estándares de calidad emitidos y verificados por los organismos regulatorios y de control de las telecomunicaciones en el Ecuador, no obstante detalla que prestará sus servicios al cliente con los niveles de calidad especificados en el Anexo 1 (Técnico) que debidamente firmado por las partes forma parte integrante de este contrato. Así como declara que el SERVICIO DE INTERNET DEDICADO tenderá: Disponibilidad 99,6% mensual calculada sobre la base de 720 horas al mes. Para el cálculo de no disponibilidad del servicio no se considerará el tiempo durante el cual no se lo haya podido prestar debido a circunstancias de caso fortuito o fuerza mayor o completamente ajenas al proveedor. Para trabajos en caso de mantenimiento, en la medida de lo posible, deberán ser planificados en períodos de 4 horas después de la media noche, debiéndose notificar previamente el tiempo de no disponibilidad por mantenimiento y siguiendo lo previsto en la Ley Orgánica de Defensa del Consumidor. El PROVEEDOR recibirá requerimientos del Cliente, las 24 horas del día, a través de los números 0984789568 - 0995974781, o los que se haga conocer en el futuro a los abonados; o mediante e-mail: <a>insysred@live.com</a> y lo registrará en el sistema haciendo la apertura de un registro y lo dirigirá al personal indicado. EL PROVEEDOR realizará el seguimiento de los requerimientos y el cumplimiento de la corrección del problema, en un plazo máximo de 24 horas contadas desde que se notifique el problema. Las características técnicas y de calidad de servicio constan en el Anexo 1 que debidamente firmado por las partes es integrante del presente contrato y cumple con lo exigido en la Resolución 216-09-CONATEL-2009.
+            </p>
+  
+            <h2>SEPTIMA.- MANTENIMIENTO PREVENTIVO Y CORRECTIVO Y UTILIZACIÓN DE LA INFRAESTRUCTURA: </h2>
+            <p>
+              El mantenimiento preventivo y correctivo, ordinario y extraordinario corren por cuenta de EL PERMISIONARIO; mientras que el CLIENTE será responsable del manejo, mantenimiento, reparación y/o adecuación de los equipos que son parte de la red del CLIENTE. El CLIENTE, es responsable que las instalaciones eléctricas dentro de su infraestructura cuenten con energía eléctrica aterrizada y estabilizada; adicionalmente, el(los) equipo(s) que EL PROVEEDOR instale en la ubicación contratada por el CLIENTE debe(n) ser conectados a un toma de UPS provista por el CLIENTE. En casos de interrupción en la prestación del servicio se reintegrará o compensará al abonado conforme a la Ley Orgánica de Defensa del Consumidor y su Reglamento.
+            </p>
+  
+            <h2>OCTAVA.-TERMINACION:</h2>
+            <p>
+              El presente contrato terminará por las siguientes causas: a) Por mutuo acuerdo de las partes b) Por incumplimiento de las obligaciones contractuales. c) Por vencimiento del plazo de vigencia previa comunicación de alguna de las partes; d) Por causas de fuerza mayor o caso fortuito debidamente comprobado; e) Por falta de pago de 2 mensualidades por parte del Cliente. f) El Cliente podrá dar por terminado unilateralmente el contrato en cualquier tiempo, previa notificación por escrito con la menos quince días de anticipación a la finalización del período en curso, no obstante el Cliente tendrá la obligación de cancelar los saldos pendientes únicamente por los servicios prestados hasta la fecha de la terminación unilateral del contrato, así como los valores adeudados por la adquisición de los bienes necesarios para la prestación del servicio de ser el caso. g) Si el CLIENTE utiliza los servicios contratados para fines distintos a los convenidos, o si los utiliza en prácticas contrarias a la ley, las buenas costumbres, la moral o cualquier forma que perjudique a EL PROVEEDOR.
+            </p>
+  
+            <h2>NOVENA.- OBLIGACIONES DE LAS PARTES:  </h2>
+            <p>El PROVEEDOR se obliga a lo siguiente:</p>
+            
+            <ul style="padding-left: 35px;">
+              <li data-list-text="-"><p>Proporcionar el mantenimiento preventivo y  correctivo, del servicio y la configuración respectiva.</p>
+              </li>
+              <li data-list-text="-"><p>Las determinadas en la Resolución 216-09-CONATEL-2009, o las que emitiere el órgano regulador.</p>
+              </li>
+              <li data-list-text="-"><p>Al pago de indemnizaciones por no cumplimiento de niveles de calidad estipulados en el presente contrato.</p>
+              </li>
+              <li data-list-text="-"><p>Garantizarán la privacidad y confidencialidad de las telecomunicaciones en el servicio prestado al CLIENTE.</p>
+              </li>
+              <li data-list-text="-"><p>Las que constan en le Reglamento para la Prestación de Servicios de Valor Agregado y sus modificaciones. </li>
+            </ul>
+            
+            <p>El CLIENTE se obliga a lo siguiente:</p>
+            <ul style="padding-left: 35px;">
+              <li data-list-text="-"><p>Manejo, mantenimiento, reparación y/o adecuación de los equipos que son parte de su red;</p></li>
+              <li data-list-text="-"><p>Que las instalaciones eléctricas dentro de su infraestructura cuenten con energía eléctrica aterrizada y estabilizada;</p>
+              </li>
+              <li data-list-text="-"><p>Que el (los) equipo(s) sean conectado (s) a un toma de UPS provista por este último.</p></li><li data-list-text="-"><p>Pago oportuno e íntegro de los valores pactados en el presente contrato.</p></li>
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div id="page3">
+        <div class="row m-0 p-2">
+          <div style="padding-left: 9pt;line-height: 137%; text-align: justify;">
+            <h2>DÉCIMA.- CAMBIOS EN EL CONTRATO:</h2>
+            <p>
+              Si por alguna razón se reformara el Reglamento o la Ley que regula la prestación de los servicios de valor agregado e internet, el presente contrato podrá ser modificado en función de los cambios que se dieren previa aprobación y registro de la SENATEL.
+            </p>
+    
+            <h2>UNDÉCIMA.- RESPONSABILIDAD:</h2>
+            <p>
+              EL CLIENTE asume la responsabilidad por los actos de sus empleados, contratistas o subcontratistas por el mal uso que eventualmente diere a los servicios que se les preste; en especial si se usare los servicios o enlaces prestados en actividades contrarias a las leyes y regulaciones de telecomunicaciones. Por su parte EL PROVEEDOR tendrá responsabilidad por la debida prestación del servicio contratado en las características y estándares del presente contrato y las señaladas en las Leyes y regulación vigente.
+            </p>
+    
+            <h2>DUODÉCIMA.- CONTROVERSIAS:</h2>
+            <p>
+              Independientemente del juzgamiento de infracciones conforme a Ley Orgánica de Defensa del Consumidor, las partes acuerdan que podrán solucionar sus controversias a través de la mediación, en el Centro de Mediación y Arbitraje de la Cámara de Comercio de Guayaquil. Si la mediación no llegare a producirse las partes acuerdan expresamente que se someten a un Arbitraje en Derecho ante el mismo centro, para lo cual renuncian a la jurisdicción ordinaria, y se someten expresamente al arbitraje, obligándose a acatar el laudo que expida el Tribunal Arbitral y se comprometen a no interponer ningún tipo de recurso en contra del laudo dictado, a más de los permitidos en la ley, para lo cual presentan las respectivas copias de cédulas de identidad y ciudadanía para el reconocimiento de firmas respectivo. Para constancia de lo anterior las partes firman en tres ejemplares del mismo tenor, en el cantón DURAN, a los 28 días del mes de Diciembre de 2023.
+            </p>
+                
+            <div class="row w-full" style="padding-top: 150px !important;">
+              <div class="col-6">
+                <p style="text-align: center; border-top: 2px solid black;">JACOBO HIPOLITO CHANCAY CEPEDA</p>
+                <p style="text-align: center;">GERENTE GENERAL INSYSRED S.A.</p>
+                <p style="text-align: center;">R.U.C 0992220554001</p>
+              </div>
+              <div class="col-6">
+                <p style="text-align: center; border-top: 2px solid black;">{{ cliente.nombres | uppercase }}</p>
+                <p style="text-align: center;">C.I./RUC: {{ cliente.identificacion }}</p>
+                <p style="text-align: center;">{{ cliente.ubicacion || '' }}</p>
+                <p style="text-align: center;">TELF: {{ cliente.telfCelular || '' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+
+    
+
+    <div class="row justify-content-center">
+      <div class="col-6 text-center my-5">
+        <button (click)="descargarPdf()">Descargar PDF</button>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>

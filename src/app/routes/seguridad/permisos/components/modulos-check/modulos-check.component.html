@@ -1,0 +1,11 @@
+<!-- checkbox.component.html -->
+<mat-card class="col-11 flex-row m-l-16 p-8">
+    <mat-checkbox class="example-margin" [checked]="data.checked" (change)="checkModulo(data)">
+        {{data.name}}
+      </mat-checkbox>
+      <section class="flex-row m-l-16 p-8"  *ngIf="data.children">
+        <app-modulos-check *ngFor="let child of data.children" [data]="child" (cambio)="checkModulo(child)">
+        </app-modulos-check>
+    </section>
+</mat-card>
+

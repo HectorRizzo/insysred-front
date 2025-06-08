@@ -1,0 +1,17 @@
+mat-table {
+  margin-bottom: 20px;
+
+  mat-header-cell,
+  mat-footer-cell {
+    font-weight: bold !important;
+  }
+}
+
+.bordes {
+  border: 1px solid #0000001f;
+}
+
+label {
+  font-weight: bold;
+  display: inline;
+}

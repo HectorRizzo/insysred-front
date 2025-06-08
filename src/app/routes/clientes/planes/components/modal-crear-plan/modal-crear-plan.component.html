@@ -1,0 +1,82 @@
+<mat-card>
+
+  <mat-card-content>
+
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2>Crear Plan</h2>
+      </div>
+    </div>
+
+    <form [formGroup]="createPlanForm" class="form-field-full" >
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" matInput placeholder="Nombre" required>
+            <mat-icon matSuffix>badge</mat-icon>
+            <mat-error *ngIf="createPlanForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <input formControlName="descripcion" matInput placeholder="Descripción" required>
+            <mat-icon matSuffix>edit_note</mat-icon>
+            <mat-error *ngIf="createPlanForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Cantidad de megas</mat-label>
+            <input formControlName="megabytes" matInput type="number" placeholder="MB" required>
+            <mat-icon matSuffix>language</mat-icon>
+            <mat-error *ngIf="createPlanForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Costo</mat-label>
+            <input formControlName="price" matInput type="number" placeholder="Costo" required>
+            <mat-icon matSuffix>payments</mat-icon>
+            <mat-error *ngIf="createPlanForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-slide-toggle color="primary" formControlName="status" [checked]="!!(createPlanForm.get('status'))">Estado</mat-slide-toggle>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-button color="primary" (click)="closeModal()">Cancelar</button>
+        <button [disabled]="createPlanForm.invalid" mat-button color="primary" type="submit" (click)="savePlan()">Guardar</button>
+      </div>
+    </div>
+
+  </mat-card-content>
+
+</mat-card>

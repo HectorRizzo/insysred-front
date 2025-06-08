@@ -1,0 +1,9 @@
+.table-container {
+  max-height: 400px; /* Altura máxima de la tabla */
+  overflow: auto; /* Agrega scroll cuando el contenido excede la altura máxima */
+}
+
+.mat-mdc-header-cell {
+  font-weight: bold;
+  border-bottom-color: #000;
+}

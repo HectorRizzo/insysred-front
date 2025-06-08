@@ -1,0 +1,120 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ 'title_new_ord_trabajo' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <br>
+    <form [formGroup]="newOrdtForm" class="form-field-full">
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="datepicker" placeholder="Selecciona una fecha"
+                   formControlName="fechaVisita">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+            <mat-icon matPrefix>calendar_today</mat-icon>
+            <mat-error *ngIf="newOrdtForm.get('fechaVisita')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" id="lst_horario" >
+            <mat-label>Hora visita</mat-label>
+            <mat-select (selectionChange)="onSelectionHorario($event)" [(ngModel)]="idHorario" formControlName = "horaVisita">
+              <mat-option *ngFor="let dato of dataHorario" [value]="dato.id">
+                {{ dato.horaInicio }} - {{dato.horaFin}}
+              </mat-option>
+            </mat-select>
+            <mat-icon matIconPrefix>av_timer</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Persona Referencia</mat-label>
+            <input matInput placeholder="Perona Referencia" formControlName="personaReferencia"
+                   required>
+            <mat-icon matPrefix>contacts</mat-icon>
+            <mat-error *ngIf="newOrdtForm.get('personaReferencia')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Número Referencia</mat-label>
+            <input matInput placeholder="Número de referencia" formControlName="telefonoReferencia"
+                   required>
+            <mat-icon matPrefix>contact_phone</mat-icon>
+            <mat-error *ngIf="newOrdtForm.get('telefonoReferencia')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" id="lst_moitivo" >
+            <mat-label>Motivo</mat-label>
+            <mat-select (selectionChange)="onSelectionMotivo($event)" [(ngModel)]="idMotivo" formControlName = "motivo">
+              <mat-option *ngFor="let dato of dataMotivo" [value]="dato.id">
+                {{ dato.motivo }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matIconPrefix>list</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" id="lst_tecnico" >
+            <mat-label>Técnicos</mat-label>
+            <mat-select multiple (selectionChange)="onSelectionTecnico($event)" formControlName="tecnico">
+                <ngx-mat-select-search [formControl]="searchControl"></ngx-mat-select-search>
+                <mat-option *ngFor="let dato of dataTecnico" [value]="dato">
+                {{ dato.primerApellido }} {{ dato.segundoApellido }} {{ dato.primerNombre }} {{ dato.segundoNombre }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matIconPrefix>list</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input matInput placeholder="Dirección" formControlName="direccionReferencia"
+                   required>
+            <mat-icon matPrefix>pin_drop</mat-icon>
+            <mat-error *ngIf="newOrdtForm.get('direccionReferencia')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Referencia de dirección</mat-label>
+            <input matInput placeholder="Referencia" formControlName="referenciaDireccion"
+                   required>
+            <mat-icon matPrefix>pin_drop</mat-icon>
+            <mat-error *ngIf="newOrdtForm.get('referenciaDireccion')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-10 text-center">
+          <button mat-icon-button color="primary" title="Guardar" (click)="guardarDialog()">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" title="Cancelar" (click)="closeDialog()">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

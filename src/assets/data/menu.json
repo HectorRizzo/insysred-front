@@ -1,0 +1,139 @@
+{
+  "menu": [
+    {
+      "route": "/",
+      "name": "comercial",
+      "type": "sub",
+      "icon": "group_add",
+      "children": [
+        {
+          "route": "clientes/cliente",
+          "name": "clientes",
+          "type": "link"
+        },
+        {
+          "route": "clientes/servicio",
+          "name": "servicio",
+          "type": "link"
+        },
+        {
+          "route": "clientes/planes",
+          "name": "planes",
+          "type": "link"
+        },
+        {
+          "route": "clientes/rubros",
+          "name": "rubros",
+          "type": "link"
+        },
+        {
+          "route": "clientes/cobros",
+          "name": "cobros",
+          "type": "link"
+        },
+        {
+          "route": "clientes/creditos",
+          "name": "creditos",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "name": "procesos",
+      "type": "sub",
+      "icon": "dashboard_customize",
+      "children": [
+        {
+          "route": "procesos/proceso-factura",
+          "name": "proceso-factura",
+          "type": "link"
+        },
+        {
+          "route": "procesos/carga-banco",
+          "name": "carga-banco",
+          "type": "link"
+        },
+        {
+          "route": "procesos/comprobante-cliente",
+          "name": "comprobante-cliente",
+          "type": "link"
+        },
+        {
+          "route": "procesos/conciliacion",
+          "name": "conciliacion",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "name": "empresa",
+      "type": "sub",
+      "icon": "business",
+      "children": [
+        {
+          "route": "empresa/administracion",
+          "name": "administracion",
+          "type": "link"
+        },
+        {
+          "route": "empresa/sucursal",
+          "name": "sucursal",
+          "type": "link"
+        },
+        {
+          "route": "empresa/servidores",
+          "name": "router",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "name": "tecnico",
+      "type": "sub",
+      "icon": "people",
+      "children": [
+        {
+          "route": "tecnico/ord_trabajo",
+          "name": "ordenes_trabajo",
+          "type": "link"
+        },
+        {
+          "route": "tecnico/tecnicos",
+          "name": "tecnicos",
+          "type": "link"
+        },
+        {
+          "route": "tecnico/equipos",
+          "name": "equipos",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "name": "seguridad",
+      "type": "sub",
+      "icon": "security",
+      "children": [
+        {
+          "route": "seguridad/permisos",
+          "name": "permisos",
+          "type": "link"
+        },
+        {
+          "route": "seguridad/usuario",
+          "name": "usuarios",
+          "type": "link"
+        },
+        {
+          "route": "seguridad/roles",
+          "name": "rol",
+          "type": "link"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<mat-toolbar class="matero-toolbar">
+  <button mat-icon-button *ngIf="showToggle" (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <app-branding *ngIf="showBranding"></app-branding>
+
+  <span class="flex-fill"></span>
+
+<!-- Joseph -->
+  <mat-form-field appearance="outline" id="lst_sucursal" >
+    <mat-label>Sucursal</mat-label>
+      <mat-select (selectionChange)="onSelectionChange($event)" [(ngModel)]="idSucursal">
+        <mat-option *ngFor="let dato of dataSouce" [value]="dato.id">
+          {{ dato.nombre }}
+        </mat-option>
+    </mat-select>
+    <mat-icon matIconPrefix>list</mat-icon>
+  </mat-form-field>
+
+  <!--<button mat-icon-button>
+    <mat-icon>search</mat-icon>
+  </button>
+-->
+  <button mat-icon-button (click)="toggleFullscreen()">
+    <mat-icon>fullscreen</mat-icon>
+  </button>
+  <!--
+    <app-notification></app-notification>
+
+    <app-translate></app-translate>
+  -->
+  <app-user></app-user>
+  <!--
+    <button mat-icon-button (click)="toggleSidenavNotice.emit()">
+      <mat-icon>list</mat-icon>
+    </button>
+    -->
+</mat-toolbar>

@@ -1,0 +1,56 @@
+<ng-container>
+  <div class="modal-header">
+    <div class="row my-3" style="justify-content: flex-end; width: 100%; text-align: right">
+      <div class="col-md-4">
+        <button
+          *ngIf="muestraBotonCerrar"
+          type="button"
+          class="close text-right"
+          aria-label="Close"
+          (click)="emitirAccion(false)"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        <!-- <img width="30" src="assets/icons/warning.svg" alt="warning-icon" /> -->
+      </div>
+      <div class="col-12 text-center">
+        <div class="title pt-1 color-green">{{titulo}}</div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center m-12">
+      <div class="col-10 fs-13 text-center" [innerHTML]="mensaje"></div>
+      <ng-container *ngIf="mensaje2">
+        <div class="col-10 mt-3 fs-13 text-center" [innerHTML]="mensaje2"></div>
+      </ng-container>
+      <br /><br />
+    </div>
+
+    <div class="row justify-content-center m-12">
+      <ng-container *ngIf="muestraBotonCancelar">
+        <button class="m-8" mat-raised-button (click)="emitirAccion(false)">
+          <ng-container *ngIf="labelButtonLeft">
+            {{ labelButtonLeft }}
+          </ng-container>
+          <ng-container *ngIf="!labelButtonLeft">
+            {{ 'sharedGeneral.modalAdvertenciaGeneral.cancelar' | translate }}
+          </ng-container>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="muestraBotonAceptar">
+        <button class="m-8" mat-raised-button color="primary" (click)="emitirAccion(true)">
+          <ng-container *ngIf="labelButtonRight">
+            {{ labelButtonRight }}
+          </ng-container>
+          <ng-container *ngIf="!labelButtonRight"> Aceptar </ng-container>
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

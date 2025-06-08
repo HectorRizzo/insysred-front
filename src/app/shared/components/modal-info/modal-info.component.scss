@@ -1,0 +1,31 @@
+* {
+  font-family: 'Open Sans', 'Helvetica', 'Arial', 'serif' !important;
+  overflow: hidden;
+}
+
+.modal-header {
+  font-family: 'Open Sans', 'Helvetica', 'Arial', 'serif' !important;
+  height: 20px;
+  top: 11px;
+  border: none !important;
+  button {
+    background-color: inherit !important;
+    border: none !important;
+    span {
+      font-size: 35px;
+      font-weight: 300;
+      color: #adb5bd;
+      position: relative;
+      top: 15px;
+    }
+  }
+}
+
+.modal-body {
+  .title {
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    position: relative;
+  }
+}

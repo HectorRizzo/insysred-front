@@ -1,0 +1,140 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ watchMode ? 'AtenderOrden' : 'Atender Orden Trabajo' }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <br>
+    <form [formGroup]="atenderOrdenTrabForm" class="form-field-full">
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Detalle</mat-label>
+            <input matInput placeholder="Detalle" formControlName="detalle"
+                   required>
+            <mat-icon matPrefix>details</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <section class="demo-expansion">
+        <mat-accordion>
+          <mat-expansion-panel #panel3>
+            <mat-expansion-panel-header><b>Datos de conexión</b></mat-expansion-panel-header>
+            <form [formGroup]="datConexionForm" class="form-field-full">
+              <div class="row">
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Detalle" formControlName=""
+                           required>
+                    <mat-icon matPrefix>details</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </form>
+            <mat-action-row>
+              <button mat-button (click)="panel3.expanded = false">Close</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel #panel3>
+            <mat-expansion-panel-header><b>Configuración WIFI</b></mat-expansion-panel-header>
+            <form>
+            </form>
+            <mat-action-row>
+              <button mat-button (click)="panel3.expanded = false">Close</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel #panel3>
+            <mat-expansion-panel-header><b>Detalle visita</b></mat-expansion-panel-header>
+            <p>
+              The dachshund is a short-legged, long-bodied, hound-type dog breed. The standard size
+              dachshund was developed to scent, chase, and flush out badgers and other burrow-dwelling
+              animals, while the miniature ...
+            </p>
+            <mat-action-row>
+              <button mat-button (click)="panel3.expanded = false">Close</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </section>
+      <div class="row justify-content-center">
+        <div class="col-10 text-center">
+          <button mat-icon-button color="primary" title="Guardar" (click)="atender()">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" title="Cancelar" (click)="closeDialog()">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

@@ -1,0 +1,98 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ 'title_new_router' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <br>
+    <form [formGroup]="newServertForm" class="form-field-full">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="nombre" required>
+            <mat-icon matPrefix>badge</mat-icon>
+            <mat-error *ngIf="newServertForm.get('nombre')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput placeholder="usuario" formControlName="usuario" required>
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="newServertForm.get('usuario')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
+            <mat-icon matPrefix>password</mat-icon>
+            <mat-error *ngIf="newServertForm.get('password')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Ip</mat-label>
+            <input matInput placeholder="_._._._" formControlName="ip" [inputMask]="ipAddressMask" required>
+            <mat-icon matPrefix>settings_remote</mat-icon>
+            <mat-error *ngIf="newServertForm.get('ip')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Puerto</mat-label>
+            <input type="number" matInput placeholder="Puerto" formControlName="puerto" required>
+            <mat-icon matPrefix>settings_remote</mat-icon>
+            <mat-error *ngIf="newServertForm.get('puerto')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Gateway</mat-label>
+            <input matInput placeholder="_._._._" formControlName="gateway" [inputMask]="ipAddressMask" required>
+            <mat-icon matPrefix>settings_remote</mat-icon>
+            <mat-error *ngIf="newServertForm.get('gateway')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-10 text-center">
+          <button mat-icon-button color="warn" title="Cancelar" (click)="closeDialog()">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          <button [disabled]="newServertForm.invalid" mat-icon-button color="primary" title="Guardar" (click)="guardarDialog()">
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

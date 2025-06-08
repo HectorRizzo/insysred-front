@@ -1,0 +1,297 @@
+<mat-card>
+  <mat-card-content>
+    <div class="m-4 p-4">
+      <div class="row">
+        <div class="col-11">
+          <h2>Conciliación</h2>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px !important; row-gap: 15px">
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-label>Filtrar cliente</mat-label>
+            <input
+              matInput
+              type="text"
+              [formControl]="filtroNombre"
+              placeholder="Buscar por cliente por nombre o identificación"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-label>Filtrar comprobante</mat-label>
+            <input
+              matInput
+              type="text"
+              [formControl]="filtroComprobante"
+              placeholder="Buscar por número comprobante"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-label>Estado</mat-label>
+            <mat-select [formControl]="filtroEstado">
+              <ng-container *ngFor="let tipo of tiposEstado">
+                <mat-option [value]="tipo.id">
+                  {{ tipo.descripcion | titlecase }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-label>Tipo Banco</mat-label>
+            <mat-select [formControl]="filtroBanco">
+              <ng-container *ngFor="let tipo of tipoBanco">
+                <mat-option [value]="tipo.id">
+                  {{ tipo.nombre | titlecase }} (Cta. {{ tipo.numeroCuenta }})
+                </mat-option>
+              </ng-container>
+              <mat-option [value]="null"> Todos </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-3 d-flex-align-items-center">
+          <mat-form-field>
+            <mat-label>Rango fecha conciliación</mat-label>
+            <mat-date-range-input [formGroup]="emitionRange" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Fecha inicial" />
+              <input matEndDate formControlName="end" placeholder="Fecha final" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <ng-container *ngIf="emitionRange.controls.start.hasError('matStartDateInvalid')">
+            <mat-error>Fecha Inicial Inválida</mat-error>
+          </ng-container>
+
+          <ng-container *ngIf="emitionRange.controls.end.hasError('matEndDateInvalid')">
+            <mat-error>Fecha Final Inválida</mat-error>
+          </ng-container>
+        </div>
+
+        <div class="col-1 d-flex align-items-center">
+          <button
+            (click)="applySearchFilters()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Aplicar filtros"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+
+          <button
+            (click)="clear()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Limpiar filtros"
+          >
+            <mat-icon>cleaning_services</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="row m-4">
+        <div class="col-12 w-100 m-4">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Name Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>N. Conciliación</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.id || '-' }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="identificacionCliente">
+              <th mat-header-cell *matHeaderCellDef>Identificación</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element.archivoMovimientoCliente?.cliente">
+                  {{ element.archivoMovimientoCliente.cliente.tipoDocumento || '' }} -
+                  {{ element.archivoMovimientoCliente.cliente.identificacion || '' }}
+                </ng-container>
+                <ng-container *ngIf="!element.archivoMovimientoCliente?.cliente">-</ng-container>
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="nombreCliente">
+              <th mat-header-cell *matHeaderCellDef>Cliente</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element.archivoMovimientoCliente?.cliente">
+                  {{ element.archivoMovimientoCliente.cliente.nombres || '' }}
+                  {{ element.archivoMovimientoCliente.cliente.apellidos || '' }}
+                </ng-container>
+                <ng-container *ngIf="!element.archivoMovimientoCliente?.cliente">-</ng-container>
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="movimientoCliente">
+              <th mat-header-cell *matHeaderCellDef>Movimiento Cliente</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element.archivoMovimientoCliente">
+                  <div>
+                    <div>
+                      <span>Comprobante:</span>
+                      {{ element.archivoMovimientoCliente.numeroComprobante }}
+                    </div>
+                    <div>
+                      <span>Valor:</span>
+                      <ng-container *ngIf="element.archivoMovimientoCliente.valorComprobante">
+                        $
+                        {{ element.archivoMovimientoCliente.valorComprobante | number: '1.2-2' }}
+                        USD
+                      </ng-container>
+                      <ng-container *ngIf="!element.archivoMovimientoCliente.valorComprobante">
+                        -
+                      </ng-container>
+                    </div>
+                    <div>
+                      <span>Fecha:</span>
+                      <ng-container *ngIf="element.archivoMovimientoCliente.fechaComprobante">
+                        {{ element.archivoMovimientoCliente.fechaComprobante | date: 'dd/MM/yyyy' }}
+                      </ng-container>
+                      <ng-container *ngIf="!element.archivoMovimientoCliente.fechaComprobante">
+                        -
+                      </ng-container>
+                    </div>
+                    <div>
+                      <span>Estado:</span>
+                      {{ element.archivoMovimientoCliente.estadoConciliacion }}
+                    </div>
+                    <ng-container *ngIf="element.archivoMovimientoCliente.banco">
+                      <div>
+                        <span>Banco:</span> {{ element.archivoMovimientoCliente.banco.nombre }}
+                      </div>
+                      <div>
+                        <span>Cuenta:</span>
+                        {{ element.archivoMovimientoCliente.banco.tipoCuenta }} -
+                        {{ element.archivoMovimientoCliente.banco.numeroCuenta }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="!element.archivoMovimientoCliente">-</ng-container>
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="movimientoBanco">
+              <th mat-header-cell *matHeaderCellDef>Movimiento Banco</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element.detalleArchivoBanco">
+                  <div><span>Comprobante:</span> {{ element.detalleArchivoBanco.documento }}</div>
+                  <div>
+                    <span>Valor:</span>
+                    <ng-container *ngIf="element.detalleArchivoBanco.valor">
+                      $
+                      {{ element.detalleArchivoBanco.valor | number: '1.2-2' }}
+                      USD
+                    </ng-container>
+                    <ng-container *ngIf="!element.detalleArchivoBanco.valor"> - </ng-container>
+                  </div>
+                  <div>
+                    <span>Fecha:</span>
+                    <ng-container *ngIf="element.detalleArchivoBanco.fecha">
+                      {{ element.detalleArchivoBanco.fecha | date: 'dd/MM/yyyy' }}
+                    </ng-container>
+                    <ng-container *ngIf="!element.detalleArchivoBanco.fecha"> - </ng-container>
+                  </div>
+                  <div>
+                    <span>Estado:</span> {{ element.detalleArchivoBanco.estadoConciliacion }}
+                  </div>
+                  <ng-container *ngIf="element.detalleArchivoBanco.archivo.banco">
+                    <div>
+                      <span>Banco:</span> {{ element.detalleArchivoBanco.archivo.banco.nombre }}
+                    </div>
+                    <div>
+                      <span>Cuenta:</span>
+                      {{ element.detalleArchivoBanco.archivo.banco.tipoCuenta }} -
+                      {{ element.detalleArchivoBanco.archivo.banco.numeroCuenta }}
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!element.detalleArchivoBanco">-</ng-container>
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="fechaCreacion">
+              <th mat-header-cell *matHeaderCellDef>Fecha Creación</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.fechaCreacion | date: 'dd/MM/yyyy' }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <ng-container
+                  *ngIf="
+                    element.archivoMovimientoCliente?.estadoConciliacion === 'NCO' &&
+                    element.detalleArchivoBanco?.estadoConciliacion === 'NCO'
+                  "
+                >
+                  <button
+                    matTooltip="Conciliación Manual"
+                    matTooltipPosition="after"
+                    mat-icon-button
+                    class="view-colored-button"
+                    class="m-2"
+                    (click)="conciliacionManual(element)"
+                  >
+                    <mat-icon>verified_user</mat-icon>
+                  </button>
+                </ng-container>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              [class]="{
+                'tr-completa':
+                  row.archivoMovimientoCliente?.estadoConciliacion === 'CCO' ||
+                  row.detalleArchivoBanco?.estadoConciliacion === 'CCO' ||
+                  row.archivoMovimientoCliente?.estadoConciliacion === 'CMA' ||
+                  row.detalleArchivoBanco?.estadoConciliacion === 'CMA',
+                'tr-parcial':
+                  row.archivoMovimientoCliente?.estadoConciliacion === 'CDU' ||
+                  row.detalleArchivoBanco?.estadoConciliacion === 'CDU',
+                'tr-ninguno':
+                  row.archivoMovimientoCliente?.estadoConciliacion === 'NCO' ||
+                  row.detalleArchivoBanco?.estadoConciliacion === 'NCO'
+              }"
+            ></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <mat-paginator
+            (page)="handlePageEvent($event)"
+            [length]="length"
+            [pageSize]="pageSize"
+            [disabled]="disabled"
+            [showFirstLastButtons]="showFirstLastButtons"
+            [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+            [hidePageSize]="hidePageSize"
+            [pageIndex]="pageIndex"
+            aria-label="Select page"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

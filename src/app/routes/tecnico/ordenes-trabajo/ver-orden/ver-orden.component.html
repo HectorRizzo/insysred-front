@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{'title_view_orden_trab' | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><b># Orden:&nbsp;</b>{{ordTrab_view?.id}}</p>
+    <p><b>Cliente:&nbsp;</b>{{ordTrab_view?.codigoCliente?.apellidos}} {{ordTrab_view?.codigoCliente?.nombres}}</p>
+    <p><b>Sucursal:&nbsp;</b>{{ordTrab_view?.sucursal?.nombre}}</p>
+    <p><b>Motivo visita:&nbsp;</b>{{ordTrab_view?.motivo?.motivo}}</p>
+    <p><b>Fecha de visita:&nbsp;</b>{{ordTrab_view?.fechaVisita | date:'yyyy-MM-dd'}}</p>
+    <p><b>Hora de visita:&nbsp;</b>{{ordTrab_view?.horaVisita?.horaInicio}}-{{ordTrab_view?.horaVisita?.horaFin}}</p>
+    <p><b>Contacto:&nbsp;</b>{{ordTrab_view?.personaContacto}}</p>
+    <p><b># Contacto:&nbsp;</b>{{ordTrab_view?.celularContacto }}</p>
+    <p><b>Estado:&nbsp;</b>{{ordTrab_view?.estadoOrden}}</p>
+    <p><b>Dirección:&nbsp;</b>{{ordTrab_view?.direccion}}</p>
+    <p><b>Referencia: </b>{{ordTrab_view?.referenciaDireccion}}</p>
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-icon-button color="primary" title="Cerrar ventana" (click)="closeDialog()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,40 @@
+mat-table {
+  margin-bottom: 20px;
+
+  mat-header-cell {
+    font-weight: bold !important;
+  }
+}
+
+.tables-container {
+  margin-top: 15px;
+  row-gap: 20px;
+}
+
+.mat-column-fecha,
+.mat-column-valor {
+  flex: 0 0 150px !important;
+  width: 150px !important;
+}
+
+.mat-column-documento {
+  flex: 0 0 175px !important;
+  width: 175px !important;
+}
+
+.bordes {
+  border: 1px solid #0000001f;
+}
+
+.tooltip {
+  cursor: help;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.titulo {
+  font-weight: bold;
+}

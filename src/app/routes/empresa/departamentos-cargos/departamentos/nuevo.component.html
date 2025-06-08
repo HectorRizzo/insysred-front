@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+Nuevo Departamento
+    </mat-card-title>
+
+  </mat-card-header>
+
+  <mat-card-content>
+    <br>
+    <form [formGroup]="newForm" class="form-field-full">
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="nombre"
+                   required>
+            <mat-icon matPrefix>account_box</mat-icon>
+            <mat-error *ngIf="newForm.get('nombre')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripcion</mat-label>
+            <input matInput placeholder="Descripcion" formControlName="descripcion"
+                   >
+            <mat-icon matPrefix>account_box</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="m-t-8">
+        <button class="btn_save" (click)="save()" [disabled]="newForm.invalid" text>
+          <mat-icon>save</mat-icon>
+        </button>
+        <button class="btn_cancel m-x-8" (click)="closeDialog()"  text>
+          <mat-icon>cancel_presentation</mat-icon>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

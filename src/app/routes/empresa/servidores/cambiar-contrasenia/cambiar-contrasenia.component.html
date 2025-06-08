@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ 'Editar Contraseña' }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <br>
+    <form [formGroup]="cambiarContraseniaForm" class="form-field-full">
+      
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Nueva contraseña</mat-label>
+            <input matInput placeholder="Nueva contraseña" formControlName="nuevaContrasenia" required>
+            <mat-icon matPrefix>key</mat-icon>
+            <mat-error *ngIf="cambiarContraseniaForm.get('nuevaContrasenia')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Confirmar nueva Contraseña</mat-label>
+            <input matInput placeholder="Confirmar nueva contraseñá" formControlName="confirmarNuevaContrasenia" required>
+            <mat-icon matPrefix>lock</mat-icon>
+            <mat-error *ngIf="cambiarContraseniaForm.get('confirmarNuevaContrasenia')?.invalid">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="row justify-content-center">
+        <div class="col-10 text-center">
+          <button mat-icon-button color="warn" title="Cancelar" (click)="closeDialog()">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          <button [disabled]="cambiarContraseniaForm.invalid" mat-icon-button color="primary" title="Guardar" (click)="guardarDialog()">
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

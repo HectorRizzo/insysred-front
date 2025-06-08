@@ -1,0 +1,181 @@
+<mat-card>
+  <mat-card-content>
+    <div class="m-4 p-4">
+      <div class="row">
+        <div class="col-8">
+          <h2>Facturas</h2>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px !important">
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-label>Cliente</mat-label>
+            <input
+              matInput
+              type="text"
+              [formControl]="filtroCliente"
+              placeholder="Buscar cliente por número de identificación o nombres"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-3 d-flex-align-items-center">
+          <mat-form-field>
+            <mat-label>Fecha de crédito</mat-label>
+            <mat-date-range-input [formGroup]="emitionRange" [rangePicker]="picker1">
+              <input matStartDate formControlName="start" placeholder="Fecha Inicial" />
+              <input matEndDate formControlName="end" placeholder="Fecha Final" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker1></mat-date-range-picker>
+          </mat-form-field>
+
+          <ng-container *ngIf="emitionRange.controls.start.hasError('matStartDateInvalid')">
+            <mat-error>Fecha Inicial Inválida</mat-error>
+          </ng-container>
+
+          <ng-container *ngIf="emitionRange.controls.end.hasError('matEndDateInvalid')">
+            <mat-error>Fecha Final Inválida</mat-error>
+          </ng-container>
+        </div>
+
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-select [formControl]="filtroEstado">
+              <ng-container *ngFor="let tipo of tiposEstado">
+                <mat-option [value]="tipo.id">
+                  {{ tipo.descripcion }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-1 d-flex align-items-center">
+          <button
+            (click)="applySearchFilters()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Aplicar filtros"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+
+          <button
+            (click)="clear()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Limpiar filtros"
+          >
+            <mat-icon>cleaning_services</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="row m-4">
+        <div class="col-12 w-100 m-4">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Name Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>No. Crédito</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="id_contrato">
+              <th mat-header-cell *matHeaderCellDef>No. Contrato</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.contrato?.numContrato }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="cliente">
+              <th mat-header-cell *matHeaderCellDef>Cliente</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.cliente.nombres }} {{ element.cliente.apellidos }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="valor_credito">
+              <th mat-header-cell *matHeaderCellDef>Valor</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                ${{ element.valorCredito || 0 | number: '1.2-2' }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="saldo">
+              <th mat-header-cell *matHeaderCellDef>Saldo</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                ${{ element.saldo || 0 | number: '1.2-2' }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="estado_credito">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.estadoCredito }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="fecha_credito">
+              <th mat-header-cell *matHeaderCellDef>Fecha Crédito</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.fechaCredito | date: 'dd/MM/yyyy HH:mm' }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <div class="d-flex align-items-center">
+                  <button
+                    matTooltip="Ver Crédito"
+                    mat-icon-button
+                    class="view-colored-button"
+                    class="m-2"
+                    (click)="openSeeModal(element)"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              [class]="{
+                'tr-vigente': row.estadoCredito === 'VIGENTE',
+                'tr-aplicado': row.estadoCredito === 'APLICADO'
+              }"
+            ></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <mat-paginator
+            (page)="handlePageEvent($event)"
+            [length]="length"
+            [pageSize]="pageSize"
+            [disabled]="disabled"
+            [showFirstLastButtons]="showFirstLastButtons"
+            [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+            [hidePageSize]="hidePageSize"
+            [pageIndex]="pageIndex"
+            aria-label="Select page"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

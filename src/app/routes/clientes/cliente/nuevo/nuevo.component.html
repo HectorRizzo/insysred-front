@@ -1,0 +1,370 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{'title_new_client' | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-tab-group>
+    <mat-tab label="Datos">
+      <mat-card>
+        <mat-card-content>
+          <br>
+          <form [formGroup]="newClientForm" class="form-field-full">
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tipo Documento</mat-label>
+                  <mat-select formControlName="tipoidentificacion" (selectionChange)="validaTipoDocumento()">
+                    <mat-option>-- Seleccione --</mat-option>
+                    <mat-option value="CEDULA">Cédula</mat-option>
+                    <mat-option value="RUC">Ruc</mat-option>
+                    <mat-option value="PASAPORTE">Pasaporte</mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>view_headline</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('tipoIdentificacion')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Identificación</mat-label>
+                  <input matInput placeholder="Identificación" formControlName="identificacion"
+                         required>
+                  <mat-icon matSuffix>account_box</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('identificacion')?.invalid">
+                    <span *ngIf="newClientForm.get('identificacion')?.errors?.required">{{'validations.required' | translate}}</span>
+                    <span *ngIf="newClientForm.get('identificacion')?.errors?.invalidIdentificacion">{{'validations.invalid_identification' | translate}}</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6" *ngIf="!isRuc">
+                <mat-form-field appearance="outline">
+                  <mat-label>Sexo</mat-label>
+                  <mat-select formControlName="sexo">
+                    <mat-option>-- Seleccione --</mat-option>
+                    <mat-option value="HOMBRE">Masculino</mat-option>
+                    <mat-option value="MUJER">Femenino</mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>toll</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('sexo')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6" *ngIf="!isRuc">
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha Nacimiento</mat-label>
+                  <input matInput [matDatepicker]="datepicker" placeholder="Selecciona una fecha"
+                         formControlName="fNace">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker></mat-datepicker>
+                  <mat-error *ngIf="newClientForm.get('fNace')?.invalid">
+                    {{'validations.invalid_date' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6" *ngIf="!isRuc">
+                <mat-form-field appearance="outline">
+                  <mat-label>Apellidos</mat-label>
+                  <input matInput placeholder="Apellidos" formControlName="apellidos">
+                  <mat-icon matSuffix>account_box</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('apellidos')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6" *ngIf="!isRuc">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombres</mat-label>
+                  <input matInput placeholder="Nombres" formControlName="nombres">
+                 <mat-icon matSuffix>account_box</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('nombres')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6" *ngIf="isRuc">
+                <mat-form-field appearance="outline" >
+                  <mat-label>Razón Social</mat-label>
+                  <input matInput placeholder="razonSocial" formControlName="razonSocial"
+                         required>
+                  <mat-icon matSuffix>business</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('razonSocial')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6" *ngIf="isRuc">
+                <mat-form-field appearance="outline" >
+                  <mat-label>Representante Legal</mat-label>
+                  <input matInput placeholder="Representante Legal" formControlName="representanteLegal"
+                         required>
+                  <mat-icon matSuffix>account_box</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('representanteLegal')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6" *ngIf="isRuc">
+                <mat-form-field appearance="outline" >
+                  <mat-label>Identificacion Representante </mat-label>
+                  <input matInput placeholder="Identificacion Representante" formControlName="ident_representante"
+                         required>
+                  <mat-icon matSuffix>account_box</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('ident_representante')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput placeholder="Email" 
+                  formControlName="email" required type="email">
+                  <mat-icon matSuffix>contact_mail</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('email')?.invalid">
+                    <span *ngIf="newClientForm.get('email')?.errors?.required">{{'validations.required' | translate}}</span>
+                    <span *ngIf="newClientForm.get('email')?.errors?.email">{{'validations.invalid_email' | translate}}</span>
+                  </mat-error>
+                  
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Teléfono Fijo</mat-label>
+                  <input matInput  type="number" placeholder="Teléfono Fijo" formControlName="telfFijo" 
+                  >
+                  <mat-icon matSuffix>call</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('telFijo')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Teléfono Movil</mat-label>
+                  <input matInput placeholder="Teléfono Móvil"  type="number" formControlName="telfCelular" 
+                  max="999999999" required>
+                  <mat-icon matSuffix>settings_cell</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('telMovil')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <!-- <mat-form-field appearance="outline"> -->
+                  <mat-label>Documentos Adjuntos</mat-label>
+                  <input type="file" name="" id="">
+                <!-- </mat-form-field> -->
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Ubicación">
+      <mat-card>
+        <mat-card-content>
+          <form [formGroup]="newUbicacionForm" class="form-field-full">
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tipo Ubicación</mat-label>
+                  <mat-select required formControlName="tipoUbicacion">
+                    <mat-option>-- Seleccione --</mat-option>
+                    <mat-option value="1">Domicilio</mat-option>
+                    <mat-option value="2">Trabajo</mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>view_headline</mat-icon>
+                  <mat-error *ngIf="newUbicacionForm.get('tipoUbicacion')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Dirección</mat-label>
+                  <textarea matInput placeholder="Dirección" formControlName="direccion" #myTextarea style="height: 20px;"
+                         required>
+                  </textarea>
+                  <mat-icon matSuffix>map</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('direccion')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Ubicación Georeferencial</mat-label>
+                  <input matInput placeholder="Ubicación Georeferencial " formControlName="georeferencia"
+                  >
+                  <mat-icon matSuffix 
+                  (click)="openMap()">place</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('georeferencia')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-3">
+                <mat-form-field appearance="outline" id="lst_provincia" >
+                  <mat-label>Provincia</mat-label>
+                  <mat-select  formControlName="provincia" (selectionChange)="llenarCanton('datosCli')">
+                    <mat-option *ngFor="let dato of dataSouce" [value]="dato.id">
+                      {{ dato.nombre }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>list</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-3">
+                <mat-form-field appearance="outline" id="lst_canton">
+                  <mat-label>Canton</mat-label>
+                  <mat-select  formControlName="canton" >
+                    <mat-option *ngFor="let dato of dataSouceCanton" [value]="dato.id">
+                      {{ dato.nombre }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>list</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Referencia de dirección</mat-label>
+                  <textarea matInput placeholder="Referencia de dirección" formControlName="referencia" #myTextareaRef style="height: 20px;"
+                         required>
+                  </textarea>
+                  <mat-icon matSuffix>subdirectory_arrow_right</mat-icon>
+                  <mat-error *ngIf="newClientForm.get('referencia')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Referencia">
+      <mat-card>
+        <mat-card-content>
+          <br>
+          <form [formGroup]="referenceForm" class="form-field-full">
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline" id="lst_provincia" >
+                  <mat-label>Parentesco</mat-label>
+                  <mat-select  formControlName="parentesco">
+                    <mat-option *ngFor="let dato of dataParentesco" [value]="dato.id">
+                      {{ dato.descripcion }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>list</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombres</mat-label>
+                  <input matInput placeholder="Nombres" formControlName="nombres" required>
+                 <mat-icon matSuffix>account_box</mat-icon>
+                  <mat-error *ngIf="referenceForm.get('nombres')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Apellidos</mat-label>
+                  <input matInput placeholder="Apellidos" formControlName="apellidos"
+                         required>
+                  <mat-icon matSuffix>account_box</mat-icon>
+                  <mat-error *ngIf="referenceForm.get('apellidos')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-sm-3">
+                <mat-form-field appearance="outline" id="lst_provincia" >
+                  <mat-label>Provincia</mat-label>
+                  <mat-select  formControlName="ref_provincia" (selectionChange)="llenarCanton('referencia')">
+                    <mat-option *ngFor="let dato of dataSouce" [value]="dato.id">
+                      {{ dato.nombre }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>list</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-3">
+                <mat-form-field appearance="outline" id="lst_canton">
+                  <mat-label>Canton</mat-label>
+                  <mat-select  formControlName="ref_canton" >
+                    <mat-option *ngFor="let dato of dataSouceCantonReferencia" [value]="dato.id">
+                      {{ dato.nombre }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>list</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Dirección</mat-label>
+                  <textarea matInput placeholder="Dirección" formControlName="direccion" #myTextUbiRef style="height: 20px;"
+                         required>
+                  </textarea>
+                  <mat-icon matSuffix>map</mat-icon>
+                  <mat-error *ngIf="referenceForm.get('direccion')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Teléfono Fijo</mat-label>
+                  <input matInput  type="number" placeholder="Teléfono Fijo" formControlName="telfFijo" 
+                  >
+                  <mat-icon matSuffix>call</mat-icon>
+                  <mat-error *ngIf="referenceForm.get('telFijo')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Teléfono Movil</mat-label>
+                  <input matInput placeholder="Teléfono Móvil"  type="number" formControlName="telfMovil" required
+                  max="999999999">
+                  <mat-icon matSuffix>settings_cell</mat-icon>
+                  <mat-error *ngIf="referenceForm.get('telMovil')?.invalid">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <!--
+    <mat-tab label="Referencia">
+      Contenido de la Página 3
+    </mat-tab>
+    <mat-tab label="Plan Servicio">
+      Contenido de la Página 3
+    </mat-tab>
+    <mat-tab label="Facturación">
+      Contenido de la Página 3
+    </mat-tab>
+    <mat-tab label="Cuenta">
+      Contenido de la Página 3
+    </mat-tab>-->
+  </mat-tab-group>
+  <mat-card-actions>
+    <button
+      [disabled]="loading"
+      class="mat-card-actions-right"
+      mat-button color="primary"
+      (click)="guardarCliente()"
+    >Guardar</button>
+  </mat-card-actions>
+</mat-card>

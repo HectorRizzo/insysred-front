@@ -1,0 +1,343 @@
+{
+  "plans": [
+    {
+      "id": 99999999,
+      "description": "Plan 20MB",
+      "megabytes": "25",
+      "name": "Stándard",
+      "price": 7.5,
+      "status": "INACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 24142142,
+      "name": "Premium",
+      "description": "Plan 30MB",
+      "megabytes": 30,
+      "price": 10,
+      "status": "ACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 82828282,
+      "name": "Gold",
+      "description": "Plan 50MB",
+      "megabytes": 50,
+      "price": 15,
+      "status": "ACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 82811282,
+      "name": "Gold - Antiguo",
+      "description": "Plan 40MB",
+      "megabytes": 40,
+      "price": 17.5,
+      "status": "ACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 13828282,
+      "description": "DESCRIPCION ANTIGUA s",
+      "megabytes": "200",
+      "name": "PREMIUM ANTIGUO EDITADOs",
+      "price": "200",
+      "status": "ACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 0.758,
+      "description": "fsafasfasfasf",
+      "megabytes": 1,
+      "name": "aaaaaaaaaaaaaa",
+      "price": 1,
+      "status": "INACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 0.11,
+      "description": "descripcion nueva",
+      "megabytes": 2,
+      "name": "Plan nuevo",
+      "price": 2,
+      "status": "INACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 0.744,
+      "description": "descripcion 3",
+      "megabytes": 100,
+      "name": "plan 3",
+      "price": 100,
+      "status": "INACTIVO",
+      "sucursalId": 1
+    },
+    {
+      "id": 0.424,
+      "description": "DESCRIPCION EDITADA",
+      "megabytes": 100,
+      "name": "PLAN EDITADO",
+      "price": 100,
+      "status": "INACTIVO",
+      "sucursalId": 1
+    }
+  ],
+  "cliente": [
+    {
+      "id": 1,
+      "identificacion": "0930811914",
+      "nombres": "Moreira Chuquimarca Joseph Antonio",
+      "email": "usuario1@email.com",
+      "estado": true
+    },
+    {
+      "id": 2,
+      "identificacion": "1304975624",
+      "nombres": "Infante Pedro",
+      "email": "usuario2@email.com",
+      "estado": true
+    }
+  ],
+  "contratos": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "planId": 13828282,
+      "ubicacion": "Descripción ubicación",
+      "georeferencia": "Descripción georeferencia",
+      "duracionMeses": 24,
+      "status": "INACTIVO"
+    },
+    {
+      "id": 0.87,
+      "clientId": 1,
+      "planId": 82828282,
+      "ubicacion": "ubicacion prueba",
+      "georeferencia": "124124124",
+      "duracionMeses": 12,
+      "status": "ACTIVO"
+    }
+  ],
+  "sucursales": [
+    {
+      "id": 1,
+      "nombre": "Sucursal 1",
+      "direccion": "Parque empresarial Colón",
+      "establecimiento": "001",
+      "puntoEmision": "001",
+      "secuencial": "000000001",
+      "isActive": true,
+      "empresa": {
+        "id": 1,
+        "ruc": "0930811914001",
+        "nombre": "Focussoft S.A",
+        "nombreComercial": "Focussoft S.A",
+        "direccion": "Florida Norte",
+        "isActive": true,
+        "usuario": null
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Sucursal 2",
+      "direccion": "Parque empresarial Colón 2",
+      "establecimiento": "002",
+      "puntoEmision": "002",
+      "secuencial": "000000002",
+      "isActive": true,
+      "empresa": {
+        "id": 1,
+        "ruc": "0930811914002",
+        "nombre": "Hangaroa S.A",
+        "nombreComercial": "Hangaroa S.A",
+        "direccion": "Florida Norte",
+        "isActive": true,
+        "usuario": null
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Sucursal 3",
+      "direccion": "Parque empresarial Colón 3",
+      "establecimiento": "003",
+      "puntoEmision": "001",
+      "secuencial": "000000001",
+      "isActive": true,
+      "empresa": {
+        "id": 1,
+        "ruc": "0930811914003",
+        "nombre": "Goit S.A",
+        "nombreComercial": "Goit S.A",
+        "direccion": "Florida Norte",
+        "isActive": true,
+        "usuario": null
+      }
+    }
+  ],
+  "facturas": [
+    {
+      "id": 1,
+      "noFactura": "00001",
+      "nota": "",
+      "periodoFacturacion": "11/2023",
+      "fechaEmision": "01/11/2023",
+      "fechaVencimiento": "30/11/2023",
+      "sucursalId": 1,
+      "nombreCliente": "Kevin Urgilés",
+      "identificacionCliente": "0932010069",
+      "descripcion": "Plan 1",
+      "subtotal": 16.8,
+      "iva": 2.02,
+      "total": 18.8,
+      "estado": "PENDIENTE",
+      "motivoAnulacion": "",
+      "fechaPromesaPago": ""
+    },
+    {
+      "id": 2,
+      "noFactura": "00002",
+      "nota": "",
+      "periodoFacturacion": "12/2023",
+      "fechaEmision": "01/12/2023",
+      "fechaVencimiento": "31/12/2023",
+      "sucursalId": 1,
+      "nombreCliente": "Kevin Urgilés",
+      "identificacionCliente": "0932010069",
+      "descripcion": "Plan 1",
+      "subtotal": 16.8,
+      "iva": 2.02,
+      "total": 18.8,
+      "estado": "PENDIENTE",
+      "motivoAnulacion": "",
+      "fechaPromesaPago": ""
+    },
+    {
+      "id": 3,
+      "noFactura": "00003",
+      "nota": "",
+      "periodoFacturacion": "01/2024",
+      "fechaEmision": "01/01/2024",
+      "fechaVencimiento": "31/01/2024",
+      "sucursalId": 1,
+      "nombreCliente": "Kevin Urgilés",
+      "identificacionCliente": "0932010069",
+      "descripcion": "Plan 1",
+      "subtotal": 16.8,
+      "iva": 2.02,
+      "total": 18.8,
+      "estado": "PENDIENTE",
+      "motivoAnulacion": "",
+      "fechaPromesaPago": ""
+    },
+    {
+      "id": 4,
+      "noFactura": "00004",
+      "nota": "",
+      "periodoFacturacion": "11/2023",
+      "fechaEmision": "01/11/2023",
+      "fechaVencimiento": "30/11/2023",
+      "sucursalId": 1,
+      "nombreCliente": "Juan Ramirez",
+      "identificacionCliente": "0932010032",
+      "descripcion": "Plan 1",
+      "subtotal": 16.8,
+      "iva": 2.02,
+      "total": 18.8,
+      "estado": "PENDIENTE",
+      "motivoAnulacion": "",
+      "fechaPromesaPago": ""
+    },
+    {
+      "id": 5,
+      "noFactura": "00005",
+      "nota": "",
+      "periodoFacturacion": "12/2023",
+      "fechaEmision": "01/12/2023",
+      "fechaVencimiento": "31/12/2023",
+      "sucursalId": 1,
+      "nombreCliente": "Juan Ramirez",
+      "identificacionCliente": "0932010032",
+      "descripcion": "Plan 1",
+      "subtotal": 16.8,
+      "iva": 2.02,
+      "total": 18.8,
+      "estado": "PENDIENTE",
+      "motivoAnulacion": "",
+      "fechaPromesaPago": ""
+    },
+    {
+      "id": 6,
+      "noFactura": "00006",
+      "nota": "",
+      "periodoFacturacion": "01/2024",
+      "fechaEmision": "01/01/2024",
+      "fechaVencimiento": "31/01/2024",
+      "sucursalId": 1,
+      "nombreCliente": "Juan Ramirez",
+      "identificacionCliente": "0932010032",
+      "descripcion": "Plan 1",
+      "subtotal": 16.8,
+      "iva": 2.02,
+      "total": 18.8,
+      "estado": "PENDIENTE",
+      "motivoAnulacion": "",
+      "fechaPromesaPago": ""
+    }
+  ],
+  "ordenTrabajo": [
+    {
+      "id": 1,
+      "codigo": 1,
+      "numOrden": 900,
+      "sucursal": {
+        "id": 1,
+        "nombre": "La florida",
+        "direccion": "La Florida",
+        "establecimiento": "002",
+        "puntoEmision": "001",
+        "secuencial": "000000001",
+        "isActive": true,
+        "empresa": {
+          "id": 1,
+          "ruc": "0930811914001",
+          "nombre": "Focussoft S.A",
+          "nombreComercial": "Focussoft S.A",
+          "direccion": "Pancho Jácome",
+          "isActive": true,
+          "representanteLegal": {
+            "id": 2,
+            "tipoDocumento": "CEDULA",
+            "identificacion": "0930811914",
+            "apellidos": "Moreira Chuquimarca",
+            "nombres": "Joseph Antonio",
+            "cargo": "Administrador general"
+          }
+        }
+      },
+      "contrato": null,
+      "cliente": {
+        "id": 15,
+        "tipoDocumento": "CEDULA",
+        "identificacion": "0930811922",
+        "sexo": "HOMBRE",
+        "fechaNace": "2024-01-04T03:04:15.164Z",
+        "apellidos": "Moreira Chuquimarca",
+        "nombres": "Joseph Antonio",
+        "razonSocial": "",
+        "email": "moreirajoseph5@gmail.com",
+        "telfFijo": "",
+        "telfCelular": null,
+        "fileIdentificacion": null,
+        "filePlanilla": null
+
+      },
+      "fechaVisita": "23/02/2024",
+      "horaVisita": "14:00",
+      "referenciaDirecion": "A lado de un torno",
+      "personaContacto": "Joseph Moreira,",
+      "telefonoContacto": "0997640646",
+      "estadoOrden": "Generada",
+      "codigo_motivo": "1.- Instalacion"
+    }
+  ]
+}

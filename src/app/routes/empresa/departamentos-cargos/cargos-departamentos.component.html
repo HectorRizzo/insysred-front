@@ -1,0 +1,162 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-10">
+        <h3>{{'cliente' | translate}}</h3>
+      </div>
+      <div class="col-1">
+        <h3>
+          <button mat-mini-fab color="primary" (click)="openCargoForm()">
+            <mat-icon>
+              supervisor_account</mat-icon>
+          </button>
+        </h3>
+      </div>
+      <div class="col-1">
+        <h3>
+          <button mat-mini-fab color="primary" (click)="openDepartamentoForm()">
+            <mat-icon>apartment</mat-icon>
+          </button>
+        </h3>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div class="row">
+  <mat-card class="col-sm-12">
+    <mat-card-content>
+      <div class="container mat-table-container">
+        <div class="row justify-content-between">
+          <div class="col-sm-3">
+            <h3>Cargos</h3>
+          </div>
+          <div class="col-sm-5">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Buscar Cargo</mat-label>
+              <input class="w-medium" matInput (change)="aplicarFiltro($event)" placeholder="Buscar"/>
+            </mat-form-field>
+    
+          </div>
+        </div>
+        <table mat-table [dataSource]="dataCargos">
+          <!-- Name Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef>Descripción</th>
+            <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="departamento">
+            <th mat-header-cell *matHeaderCellDef>Departamento</th>
+            <td mat-cell *matCellDef="let element">{{ element.departamento?.nombre }}</td>
+          </ng-container>
+          <!-- Actions Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef  class="centered-header">Acciones</th>
+            <td mat-cell *matCellDef="let element" style="display: flex; justify-content: center; padding: 0;">
+              <!-- <button disabled matTooltip="Más información" mat-icon-button class="view-colored-button" (click)="verCliente(element.identificacion)">
+                <mat-icon>visibility</mat-icon>
+              </button> -->
+              <button mat-icon-button color="primary" (click)="editarCargo(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="eliminarCargo(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <!-- <button mat-icon-button color="warn" (click)="eliminaCliente(element.identificacion)">
+                <mat-icon>delete</mat-icon>
+              </button> -->
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="cargosColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: cargosColumns;"></tr>
+        </table>
+        <mat-paginator
+          (page)="handlePageEvent($event)"
+          [length]="length"
+          [pageSize]="pageSize"
+          [disabled]="disabled"
+          [showFirstLastButtons]="showFirstLastButtons"
+          [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+          [hidePageSize]="hidePageSize"
+          [pageIndex]="pageIndex"
+          aria-label="Select page"
+        ></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="col-sm-12">
+    <mat-card-content>
+      <div class="container mat-table-container">
+        <div class="row justify-content-between">
+          <div class="col-sm-3">
+            <h3>Departamentos</h3>
+          </div>
+          <div class="col-sm-5">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Buscar Departamento</mat-label>
+              <input class="w-medium"
+              matInput (change)="aplicarFiltro($event)" placeholder="Buscar"/>
+            </mat-form-field>
+    
+          </div>
+        </div>
+        <table mat-table [dataSource]="dataDepartamentos">
+          <!-- Name Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef>Descripción</th>
+            <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+          </ng-container>
+          <!-- Actions Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef  class="centered-header">Acciones</th>
+            <td mat-cell *matCellDef="let element" style="display: flex; justify-content: center; padding: 0;">
+              <!-- <button disabled matTooltip="Más información" mat-icon-button class="view-colored-button" (click)="verCliente(element.identificacion)">
+                <mat-icon>visibility</mat-icon>
+              </button> -->
+              <button mat-icon-button color="primary" (click)="editarDepartamento(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button  mat-icon-button color="warn"
+              (click)="eliminarDepartamento(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <!-- <button mat-icon-button color="warn" (click)="eliminaCliente(element.identificacion)">
+                <mat-icon>delete</mat-icon>
+              </button> -->
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="departamentosColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: departamentosColumns;"></tr>
+        </table>
+        <mat-paginator
+          (page)="handlePageEvent($event)"
+          [length]="length"
+          [pageSize]="pageSize"
+          [disabled]="disabled"
+          [showFirstLastButtons]="showFirstLastButtons"
+          [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+          [hidePageSize]="hidePageSize"
+          [pageIndex]="pageIndex"
+          aria-label="Select page"
+        ></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+

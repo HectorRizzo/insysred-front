@@ -1,0 +1,43 @@
+<mat-card>
+
+  <mat-card-content>
+
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2>{{ 'Asignar Sucursal' }}</h2>
+      </div>
+    </div>
+    <section class="example-section">
+      <span class="example-list-section">
+        <mat-checkbox class="example-margin"
+                      [checked]="allChecked"
+                      (change)="setAll($event.checked)">
+          {{listSucursales.name}}
+        </mat-checkbox>
+      </span>
+      <span class="example-list-section">
+        <ul>
+          <div *ngFor="let item of listSucursales.sucursales">
+            <mat-checkbox class="example-margin"
+                          [checked]="item.checked"
+                          (change)="updateAllChecked(item)">
+              {{item.nombre}}
+            </mat-checkbox>
+          </div>
+        </ul>
+      </span>
+    </section> 
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-icon-button color="primary" title="Guardar" (click)="guardarSucursalesXUsuario()">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" title="Cancelar" (click)="closeDialog()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>

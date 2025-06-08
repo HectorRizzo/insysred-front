@@ -1,0 +1,112 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row m-4">
+      <div class="col-10">
+        <h2>Rubros Por Contrato</h2>
+      </div>
+      <div class="col-2 d-flex align-items-center justify-content-end">
+        <button mat-mini-fab color="primary" (click)="openCreateContractModal()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <div class="col-12">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Name Column -->
+          <ng-container matColumnDef="idContrato">
+            <th mat-header-cell *matHeaderCellDef>No. Contrato</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.contrato.numContrato }}
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="rubro">
+            <th mat-header-cell *matHeaderCellDef>Rubro</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.rubro.nombre }}
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.cantidad }}
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef>Valor Rubro</th>
+            <td mat-cell *matCellDef="let element">
+              ${{ element.rubro.valor || 0 | number: '1.2-2' }}
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let element">
+              ${{ element.rubro.valor * element.cantidad | number: '1.2-2' }}
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.estado }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="d-flex align-items-center">
+                <ng-container *ngIf="element.estado === 'PENDIENTE'">
+                  <button
+                    mat-icon-button
+                    class="m-2"
+                    matTooltip="Anular rubro"
+                    matTooltipPosition="right"
+                    (click)="openDeleteModal(element)"
+                  >
+                    <mat-icon>block</mat-icon>
+                  </button>
+                </ng-container>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">
+              El contrato no tiene rubros asociados.
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-paginator
+          (page)="handlePageEvent($event)"
+          [length]="length"
+          [pageSize]="pageSize"
+          [disabled]="disabled"
+          [showFirstLastButtons]="showFirstLastButtons"
+          [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+          [hidePageSize]="hidePageSize"
+          [pageIndex]="pageIndex"
+          aria-label="Select page"
+        ></mat-paginator>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

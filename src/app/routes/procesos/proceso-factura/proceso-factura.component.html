@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-content>
+    <div class="m-4 p-4">
+      <div class="row">
+        <div class="col-11">
+          <h2>Generar Facturas</h2>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px !important"></div>
+
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="PROCESO MASIVO">
+          <div class="m-12">
+            <app-proceso-factura-masivo
+              [periodos]="periodosMasivos"
+              (actualizar)="actualizarPeriodosMasivos($event)"
+            ></app-proceso-factura-masivo>
+          </div>
+        </mat-tab>
+        <mat-tab label="PROCESO INDIVIDUAL">
+          <div class="m-12">
+            <app-proceso-factura-individual
+              [periodos]="periodosIndividual"
+            ></app-proceso-factura-individual>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-card-content>
+</mat-card>

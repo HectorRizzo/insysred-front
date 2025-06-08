@@ -1,0 +1,37 @@
+<div class="d-flex w-full h-full">
+  <mat-card class="m-auto p-20" >
+    
+    <div class="m-b-12 w-full text-center">
+        <h2 style="padding: 10px 15px;">Escoge una sucursal</h2>
+    </div>
+
+    <mat-card-content>
+
+      <ng-container *ngIf="!loading">
+        <div class="border rounded">
+          <mat-chip-listbox aria-label="Escoger sucursal" style="display: flex; flex-direction: column;">
+            <mat-chip-option [selected]="idSucursal === sucursal.id" (click)="escogerSucursal(sucursal.id)" *ngFor="let sucursal of dataSouce">
+              {{ sucursal.nombre  }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin: 15px 5px;">
+          <button mat-raised-button color="primary" [disabled]="!idSucursal" routerLink="/" (click)="continuar()">
+            Continuar
+          </button>
+          <button mat-raised-button color="warn" class="m-l-8" (click)="cancelar()">
+            Cancelar
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="loading">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+      
+      
+
+      
+    </mat-card-content>
+  </mat-card>
+</div>

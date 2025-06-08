@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-12">
+        <h2>{{ 'empresa_title' | translate }}</h2>
+      <div *ngIf="dataSource">
+        <table  style="width: 75%;">
+          <tr>
+            <td>
+              <p><b>Ruc:</b> {{ dataSource[0].ruc }}</p>
+              <p><b>Nombre comercial:</b> {{ dataSource[0].nombreComercial }}</p>
+              <p><b>Nombre de la empresa:</b> {{ dataSource[0].nombre }}</p>
+              <p><b>Dirección:</b> {{ dataSource[0].direccion }}</p>
+              <p><b>Activo:</b> {{ dataSource[0].isActive }}</p>
+            </td>
+            <td style="padding-left: 10%;">
+              <div class="col-12">
+                <h2>{{ 'rep_legal_title' | translate }}</h2></div>
+              <p><b>Tipo Documento:</b> {{ dataSource[0].representanteLegal?.tipoDocumento }}</p>
+              <p><b>Identificacion:</b> {{ dataSource[0].representanteLegal?.identificacion }}</p>
+              <p><b>Apellidos:</b> {{ dataSource[0].representanteLegal?.apellidos }}</p>
+              <p><b>Nombres:</b> {{ dataSource[0].representanteLegal?.nombres }}</p>
+              <p><b>Cargo:</b> {{ dataSource[0].representanteLegal?.cargo }}</p>
+            </td>
+          </tr>
+          <!-- Puedes agregar más filas según sea necesario -->
+        </table>
+
+
+        <!-- Agrega más campos según la estructura de tu EmpresaDto -->
+      </div>
+      </div>
+
+      <div *ngIf="!dataSource">
+        <p>La fuente de datos no está definida.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <button mat-button color="primary" (click)="openEditModal()">Editar</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

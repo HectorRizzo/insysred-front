@@ -1,0 +1,38 @@
+mat-table,
+table {
+  margin-bottom: 20px;
+
+  mat-header-cell,
+  th {
+    font-weight: bold !important;
+  }
+
+  .mat-column-header-row-group {
+    background-color: #f5f5f5;
+  }
+}
+
+.mat-column-banco {
+  flex-direction: column;
+  align-items: start;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.tables-container {
+  margin-top: 15px;
+  row-gap: 20px;
+}
+
+.bordes {
+  border: 1px solid #0000001f;
+}
+
+.titulo {
+  font-weight: bold;
+}

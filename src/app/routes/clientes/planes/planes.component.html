@@ -1,0 +1,119 @@
+<mat-card>
+    <mat-card-content>
+      <div class="row m-4">
+        <div class="col-10">
+          <h2>Planes</h2>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-end">
+          <button mat-mini-fab color="primary" (click)="openCreatePlanModal()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="row m-2">
+        <div class="col-4">
+          <!--<section class="example-section">
+            <mat-checkbox [checked]="visualizarActivos" (change)="validateActiveData($event)" class="example-margin">Activos</mat-checkbox>
+            <mat-checkbox [checked]="visualizarInactivos" (change)="validateInactiveData($event)" class="example-margin">Inactivos</mat-checkbox>
+          </section>-->
+          <mat-form-field>
+            <mat-label>Filtrar por estado:</mat-label>
+            <mat-select [(value)]="estado" (selectionChange)="mostrarAlerta($event)">
+              <mat-option value="t" selected>Todos</mat-option>
+              <mat-option value="a">Activos</mat-option>
+              <mat-option value="i">Inactivos</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="row m-4">
+        <div class="col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Buscar</mat-label>
+            <input matInput (change)="applyFilter($event)" placeholder="Plan 20Mb." #input>
+          </mat-form-field>
+
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> # Id Plan </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Descripción </th>
+              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef> Precio </th>
+              <td mat-cell *matCellDef="let element"> $ {{element.price}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="megabytes">
+              <th mat-header-cell *matHeaderCellDef> Velocidad MB </th>
+              <td mat-cell *matCellDef="let element"> {{element.megabytes}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="microtick">
+              <th mat-header-cell *matHeaderCellDef> ENVÍO MICROTICK </th>
+              <td mat-cell *matCellDef="let element"> {{element.envioMicrotick ? "SI" : "NO"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Acciones </th>
+              <td mat-cell *matCellDef="let element">
+                <div class="d-flex align-items-center">
+                    <button mat-icon-button class="view-colored-button" class="m-2" (click)="openSeePlanModal(element)">
+                      <mat-icon>visibility</mat-icon>
+                    </button>
+                    <button mat-icon-button class="m-2" (click)="openEditPlanModal(element)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <mat-slide-toggle color="primary"
+                      [(ngModel)]="element.status"
+                      (change)="updateStatus($event, element)"
+                      >
+                    </mat-slide-toggle>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [class]="{ 'tr-envio-si': row.envioMicrotick, 'tr-envio-no': !row.envioMicrotick }"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No existe data para el valor "{{input.value}}"</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <mat-paginator
+            (page)="handlePageEvent($event)"
+            [length]="length"
+            [pageSize]="pageSize"
+            [disabled]="disabled"
+            [showFirstLastButtons]="showFirstLastButtons"
+            [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+            [hidePageSize]="hidePageSize"
+            [pageIndex]="pageIndex"
+            aria-label="Select page"
+        ></mat-paginator>
+        </div>
+      </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h3>{{ 'title_sucursal_router' | translate }}</h3>
+    </mat-card-title>
+  </mat-card-header>
+  <swiper-container 
+  pagination="true" pagination-clickable="true"
+  loop="true">
+    <swiper-slide>
+      <img src="https://swiperjs.com/demos/images/nature-1.jpg" alt="Nature 1" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="https://swiperjs.com/demos/images/nature-2.jpg" alt="Nature 2" />
+  
+    </swiper-slide>
+    <swiper-slide>
+      <img src="https://swiperjs.com/demos/images/nature-3.jpg" alt="Nature 3" />
+    </swiper-slide>
+  </swiper-container>
+  <mat-card-content>
+    <div class="container mat-table-container">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="seleccione">
+          <th mat-header-cell *matHeaderCellDef>Seleccionar</th>
+          <td mat-cell *matCellDef="let elemento">
+            <mat-checkbox
+              [checked]="estaSeleccionado(elemento)"
+              (change)="seleccionarElemento(elemento)"
+            ></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="establecimiento">
+          <th mat-header-cell *matHeaderCellDef>Establecimiento</th>
+          <td mat-cell *matCellDef="let element">{{ element.establecimiento }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="puntoEmision">
+          <th mat-header-cell *matHeaderCellDef>Emisión</th>
+          <td mat-cell *matCellDef="let element">{{ element.puntoEmision }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="secuencial">
+          <th mat-header-cell *matHeaderCellDef>Secuencial</th>
+          <td mat-cell *matCellDef="let element">{{ element.secuencial }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-icon-button color="primary" title="Guardar" (click)="guardarAsignacion()">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" title="Cancelar" (click)="closeDialog()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>

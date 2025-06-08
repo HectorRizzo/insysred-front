@@ -1,0 +1,84 @@
+<mat-card>
+
+  <mat-card-content>
+
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2>{{ watchMode ? 'Plan' : 'Editar Plan' }}</h2>
+      </div>
+    </div>
+
+    <form class="form-field-full" [formGroup]="editPlanForm">
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" matInput placeholder="Nombre" required>
+            <mat-icon matSuffix>badge</mat-icon>
+            <!-- <mat-error *ngIf="newClientForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <input formControlName="descripcion" matInput placeholder="Descripción" required>
+            <mat-icon matSuffix>edit_note</mat-icon>
+            <!-- <mat-error *ngIf="newClientForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Cantidad de megas</mat-label>
+            <input formControlName="megabytes" matInput placeholder="MB" required >
+            <mat-icon matSuffix>language</mat-icon>
+            <!-- <mat-error *ngIf="newClientForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Costo</mat-label>
+            <input formControlName="price" matInput placeholder="Costo" required>
+            <mat-icon matSuffix>payments</mat-icon>
+            <!-- <mat-error *ngIf="newClientForm.get('identificacion')?.invalid">
+              {{'validations.required' | translate}}
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-slide-toggle color="primary" (change)="toggleEvent($event)" formControlName="status" [checked]="plan.status">Estado</mat-slide-toggle>
+        </div>
+      </div> -->
+
+    </form>
+
+    <ng-container *ngIf="!watchMode">
+      <div class="row justify-content-center">
+        <div class="col-10 text-center">
+          <button mat-button color="primary" (click)="closeModal()">Cancelar</button>
+          <button [disabled]="editPlanForm.invalid" mat-button color="primary" type="submit" (click)="editPlan()">Actualizar</button>
+        </div>
+      </div>
+    </ng-container>    
+    
+  </mat-card-content>
+
+</mat-card>

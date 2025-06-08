@@ -1,0 +1,37 @@
+<mat-card>
+
+  <mat-card-content>
+
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2>Cambiar estado contrato</h2>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-sm-10">
+        <form [formGroup]="newForm" class="form-field-full">
+        <mat-form-field class="w-full">
+          <mat-label>Nuevo estado</mat-label>
+          <mat-select formControlName="estadoId">
+            <mat-option *ngFor="let est of tiposEstado" [value]="est.id"
+            (onSelectionChange)="cambiarEstado($event)">
+              {{ est.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-button color="primary" (click)="closeModal()">Cancelar</button>
+        <button mat-button color="primary" type="submit" (click)="saveState()">Guardar</button>
+      </div>
+    </div>
+
+  </mat-card-content>
+
+</mat-card>

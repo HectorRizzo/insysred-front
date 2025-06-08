@@ -1,0 +1,55 @@
+<mat-card>
+
+  <mat-card-content>
+
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <h2>{{ 'Asignar Roles' }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5" [formGroup]="sucGrupo">
+          <mat-form-field appearance="outline">
+            <mat-label>Sucursales</mat-label>
+            <mat-select formControlName="sucursal" required  (selectionChange)="getRolesUsuario()">
+              <mat-option *ngFor="let sucursal of sucursales" [value]="sucursal.id">{{sucursal.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="m-l-24 col-5">
+        <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allChecked"
+                        (change)="setAll($event.checked)">
+            {{listRoles.name}}
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            <div *ngFor="let item of listRoles.roles">
+              <mat-checkbox class="example-margin"
+                            [checked]="item.checked"
+                            (change)="updateAllChecked(item)">
+                {{item.nombre}}
+              </mat-checkbox>
+            </div>
+          </ul>
+        </span>
+      </section> 
+    </div>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-icon-button color="primary" title="Guardar" (click)="guardarSucursalesXUsuario()">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" title="Cancelar" (click)="closeDialog()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>

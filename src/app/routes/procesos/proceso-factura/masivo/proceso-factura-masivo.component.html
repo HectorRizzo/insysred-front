@@ -1,0 +1,57 @@
+<div class="row m-4">
+  <div class="col-12 w-100 m-4">
+    <table mat-table [dataSource]="periodos">
+      <!-- Name Column -->
+      <ng-container matColumnDef="periodo">
+        <th mat-header-cell *matHeaderCellDef>Periodo</th>
+        <td [hidden]="element.hidden" mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="fechaRango">
+        <th mat-header-cell *matHeaderCellDef>Rango Fecha</th>
+        <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+          {{ (element.fechaDesde | date: 'dd/MM/yyyy') || '-' }}
+          -
+          {{ (element.fechaHasta | date: 'dd/MM/yyyy') || '-' }}
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="estadoPeriodo">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+          {{ element.estadoPeriodo }}
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Procesar</th>
+        <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+          <div class="d-flex align-items-center">
+            <button
+              matTooltip="Procesar"
+              matTooltipPosition="right"
+              mat-mini-fab
+              class="view-colored-button"
+              class="m-2"
+              color="primary"
+              (click)="procesar(element)"
+              [disabled]="element.estadoPeriodo === 'PROCESADO'"
+            >
+              <mat-icon>play_arrow</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [class]="{ 'tr-aprobado': row.aprobacion, 'tr-pendiente': !row.aprobacion }"
+      ></tr>
+    </table>
+  </div>
+</div>

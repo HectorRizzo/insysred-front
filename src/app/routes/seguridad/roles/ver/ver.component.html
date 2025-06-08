@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{'title_view_rol' | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><b>Nombre:&nbsp;</b>{{rol_view?.nombre}}</p>
+    <p><b>Estado:&nbsp;</b>{{rol_view?.isActive}}</p>
+    <p><b>Descripción:&nbsp;</b>{{rol_view?.descripcion}}</p>
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-icon-button color="primary" title="Cerrar ventana" (click)="closeDialog()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

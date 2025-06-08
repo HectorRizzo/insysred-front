@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-content>
+    <div id="printable-div" style="margin: 25px 5px">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-5 p-0">
+          <h2 class="d-flex align-items-center">
+            <span class="m-2">Imprimir Recibo</span>
+          </h2>
+        </div>
+        <div class="col-5 text-right p-0">
+          <mat-chip color="primary">
+            <span class="font-bold">No. Recibo: </span>
+            {{ recibo ? recibo.id : '-' }}
+          </mat-chip>
+        </div>
+      </div>
+
+      <div class="col-12 p-0">
+        <pdf-viewer
+          [src]="url"
+          [render-text]="false"
+          [original-size]="false"
+          [autoresize]="true"
+          style="display: block; min-height: 60vh; width: 100%"
+        ></pdf-viewer>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" style="margin: 30px 5px">
+      <div class="col-10 text-center">
+        <button mat-button color="primary" (click)="closeModal()">Cerrar</button>
+        <button mat-raised-button color="primary" type="submit" (click)="descargar()">
+          Descargar
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

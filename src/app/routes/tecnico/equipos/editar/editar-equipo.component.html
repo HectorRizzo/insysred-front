@@ -1,0 +1,108 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{'editar_equipo' | translate}}</mat-card-title>
+  
+    </mat-card-header>
+  
+    <mat-card-content>
+      <br>
+      <form [formGroup]="formEquipos" class="form-field-full">             
+        <div class="row">
+            <div class="col-sm-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Factura</mat-label>
+                <input matInput placeholder="N° Factura" formControlName="facturaCompra"
+                    required>
+                <mat-icon matPrefix>account_box</mat-icon>
+                <mat-error *ngIf="formEquipos.get('facturaCompra')?.invalid">
+                {{'validations.required' | translate}}
+                </mat-error>
+            </mat-form-field>
+            </div>
+            <div  class="col-sm-2">
+            <mat-form-field>
+                <mat-label>Fecha compra</mat-label>
+                <input matInput [matDatepicker]="picker1" placeholder="Fecha compra" formControlName="fechaCompra">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error *ngIf="formEquipos.get('fechaCompra')?.invalid">
+                    {{'validations.required' | translate}}
+                </mat-error>
+            </mat-form-field>
+            </div>
+
+            <div class="col-sm-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Mac Address</mat-label>
+                <input matInput placeholder="Mac Address" formControlName="macAddress"
+                    required>
+                <mat-icon matPrefix>account_box</mat-icon>
+                <mat-error *ngIf="formEquipos.get('macAddress')?.invalid">
+                {{'validations.required' | translate}}
+                </mat-error>
+            </mat-form-field>
+            </div>
+
+            <div class="col-sm-2">
+            <mat-form-field>
+                <mat-label>Marca-Equipo</mat-label>
+                <mat-select formControlName="idMarcaEquipo">
+                <ng-container *ngFor="let tipo of dataMarcaModelo">
+                    <mat-option [value]="tipo.id">
+                    {{ tipo.nombreMarca + ' - ' + tipo.nombreModelo }}
+                    </mat-option>
+                </ng-container>
+                </mat-select>
+            </mat-form-field>
+            </div>
+
+            <div class="col-sm-2">
+            <mat-form-field appearance="outline">
+                <mat-label>Modo Operacion</mat-label>
+                <input matInput placeholder="Modo Operacion" formControlName="modoOperacion"
+                    required>
+                <mat-icon matPrefix>account_box</mat-icon>
+                <mat-error *ngIf="formEquipos.get('modoOperacion')?.invalid">
+                {{'validations.required' | translate}}
+                </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-2">
+            <mat-form-field>
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="estado">
+                <ng-container *ngFor="let tipo of dataEstadosEquipo">
+                    <mat-option [value]="tipo.id">
+                    {{ tipo.nombre }}
+                    </mat-option>
+                </ng-container>
+                </mat-select>
+            </mat-form-field>
+            </div>
+            <div class="col-sm-2">
+                <mat-form-field>
+                    <mat-label>Estado Activación</mat-label>
+                    <mat-select formControlName="activo">
+                    <ng-container *ngFor="let tipo of dataEstadoActivo">
+                        <mat-option [value]="tipo.id">
+                        {{ tipo.id}}
+                        </mat-option>
+                    </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+
+        </div>
+
+      </form>
+      <div class="m-t-8">
+        <button mat-flat-button color="primary" (click)="guardar()">
+            Guardar
+        </button>
+      <button class="m-l-12" mat-flat-button color="warn" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+    </mat-card-content>
+</mat-card>
+  

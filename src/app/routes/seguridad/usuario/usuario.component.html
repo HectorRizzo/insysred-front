@@ -1,0 +1,110 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-11">
+        <h3>Usuarios</h3>
+      </div>
+      <div class="col-1">
+        <h3>
+          <button mat-mini-fab color="primary" (click)="openFormModal()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </h3>
+
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <div class="container mat-table-container">
+      <div class="col-sm-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Buscar</mat-label>
+          <input class="w-medium" matInput (change)="aplicarFiltro($event)" placeholder="Buscar"/>
+        </mat-form-field>
+
+      </div>
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="identificacion">
+          <th mat-header-cell *matHeaderCellDef>Identificación</th>
+          <td mat-cell *matCellDef="let element">{{ element.empleado?.tipoIdentificacion + ' - ' +  element.empleado?.numeroIdentificacion }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>Usuario</th>
+          <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nombres">
+          <th mat-header-cell *matHeaderCellDef>Nombres</th>
+          <td mat-cell *matCellDef="let element">{{ element.empleado?.nombreCompleto }}</td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">{{ element.empleado?.correo }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="celular">
+          <th mat-header-cell *matHeaderCellDef>Celular</th>
+          <td mat-cell *matCellDef="let element">{{ element.empleado?.telefonoMovil }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef  class="centered-header">Acciones</th>
+          <td mat-cell *matCellDef="let element" style="display: flex; justify-content: center; padding: 0;">
+            <!-- <button disabled matTooltip="Más información" mat-icon-button class="view-colored-button" (click)="verCliente(element.identificacion)">
+              <mat-icon>visibility</mat-icon>
+            </button> -->
+             <button matTooltip="Ver Datos" mat-icon-button color="primary" (click)="verDatos(element )">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button matTooltip="Asignar Sucursales" mat-icon-button color="primary" (click)="asignarSucursales(element)">
+              <mat-icon>business</mat-icon>
+            </button>
+            <button matTooltip="Asignar Rol" mat-icon-button color="accent" (click)="asignarRol(element)">
+              <mat-icon>group</mat-icon>
+            </button>
+            <button matTooltip="Resetear contraseña" mat-icon-button color="accent" (click)="resetPassword(element)">
+              <mat-icon>vpn_key</mat-icon>
+            </button>
+            <button matTooltip="Eliminar usuario" mat-icon-button color="warn" (click)="updateStatus(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <!-- <button matTooltip="Ver contratos" mat-icon-button color="primary" (click)="mostrarModalContratos(element.cliente)">
+              <mat-icon>import_contacts</mat-icon>
+            </button>
+            
+            <button matTooltip="Orden de trabajo" mat-icon-button color="warn" (click)="addOrdTrabajo(element.cliente)">
+              <mat-icon>note_add</mat-icon>
+            </button> -->
+            <!-- <button mat-icon-button color="warn" (click)="eliminaCliente(element.identificacion)">
+              <mat-icon>delete</mat-icon>
+            </button> -->
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [disabled]="disabled"
+        [showFirstLastButtons]="showFirstLastButtons"
+        [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+        [hidePageSize]="hidePageSize"
+        [pageIndex]="pageIndex"
+        aria-label="Select page"
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

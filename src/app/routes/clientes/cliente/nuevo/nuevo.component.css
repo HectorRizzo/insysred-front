@@ -1,0 +1,19 @@
+.mat-card-actions-right{
+  justify-content: flex-end;
+}
+.btn_save {
+  padding: -1%;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn_save:hover {
+  background-color: #45a049;
+}
+
+.btn_save:active {
+  background-color: #3e8e41;
+}

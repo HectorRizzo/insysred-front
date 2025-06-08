@@ -1,0 +1,13 @@
+.mat-mdc-header-cell {
+  font-weight: bold;
+  border-bottom-color: #000;
+}
+
+
+.view-colored-button{
+  color: #1B5E20;
+}
+
+.centered-header {
+  text-align: center;
+}

@@ -1,0 +1,205 @@
+<mat-card>
+  <mat-card-content>
+    <div class="m-4 p-4">
+      <div class="row">
+        <div class="col-11">
+          <h2>Cargar Movimientos Bancarios</h2>
+        </div>
+        <div class="col-1 text-center">
+          <h3>
+            <button mat-mini-fab color="primary" (click)="openNewForm()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </h3>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px !important">
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-label>Nombre archivo</mat-label>
+            <input
+              matInput
+              type="text"
+              [formControl]="filtroNombre"
+              placeholder="Buscar por nombre archivo"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-3 d-flex-align-items-center">
+          <mat-form-field>
+            <mat-label>Rango de fecha conciliación</mat-label>
+            <mat-date-range-input [formGroup]="emitionRange" [rangePicker]="picker1">
+              <input matStartDate formControlName="start" placeholder="Fecha Inicial" />
+              <input matEndDate formControlName="end" placeholder="Fecha Final" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker1></mat-date-range-picker>
+          </mat-form-field>
+
+          <ng-container *ngIf="emitionRange.controls.start.hasError('matStartDateInvalid')">
+            <mat-error>Fecha Inicial Inválida</mat-error>
+          </ng-container>
+
+          <ng-container *ngIf="emitionRange.controls.end.hasError('matEndDateInvalid')">
+            <mat-error>Fecha Final Inválida</mat-error>
+          </ng-container>
+        </div>
+
+        <div class="col-1 d-flex align-items-center">
+          <button
+            (click)="applySearchFilters()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Aplicar filtros"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+
+          <button
+            (click)="clear()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Limpiar filtros"
+          >
+            <mat-icon>cleaning_services</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="row m-4">
+        <div class="col-12 w-100 m-4">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Name Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>No. Archivo</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef>Archivo</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.nombre }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="banco">
+              <th mat-header-cell *matHeaderCellDef>Banco</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.banco?.nombre || '-' }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="registros_exitos">
+              <th mat-header-cell *matHeaderCellDef>Registros Exitos</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.registrosExito }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="registros_errores">
+              <th mat-header-cell *matHeaderCellDef>Con Errores</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.registrosError }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="registros_repetidos">
+              <th mat-header-cell *matHeaderCellDef>Repetidos</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.registrosRepetido }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="registros_total">
+              <th mat-header-cell *matHeaderCellDef>Total Registros</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.registrosTotal }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.estadoCarga }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="fecha_inicio">
+              <th mat-header-cell *matHeaderCellDef>Fecha Inicio Carga</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.fechaInicioCarga | date: 'dd/MM/yyyy HH:mm:ss' }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="fecha_fin">
+              <th mat-header-cell *matHeaderCellDef>Fecha Fin Carga</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.fechaFinCarga | date: 'dd/MM/yyyy HH:mm:ss' }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <div class="d-flex align-items-center">
+                  <button
+                    matTooltip="Ver Datos"
+                    mat-icon-button
+                    class="view-colored-button"
+                    class="m-2"
+                    (click)="openSeeModal(element)"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              [class]="{
+                'tr-total': row.registrosExito === row.registrosTotal,
+                'tr-parcial':
+                  (row.registrosError > 0 && row.registrosError < row.registrosTotal) ||
+                  (row.registrosRepetido > 0 && row.registrosRepetido < row.registrosTotal),
+                'tr-ninguno':
+                  row.registrosError === row.registrosTotal ||
+                  row.registrosRepetido === row.registrosTotal
+              }"
+            ></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <mat-paginator
+            (page)="handlePageEvent($event)"
+            [length]="length"
+            [pageSize]="pageSize"
+            [disabled]="disabled"
+            [showFirstLastButtons]="showFirstLastButtons"
+            [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+            [hidePageSize]="hidePageSize"
+            [pageIndex]="pageIndex"
+            aria-label="Select page"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

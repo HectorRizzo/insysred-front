@@ -1,0 +1,131 @@
+<mat-card>
+  <mat-card-content>
+    <div class="m-4 p-4">
+      <div class="row">
+        <div class="col-11">
+          <h2>Rubros</h2>
+        </div>
+        <div class="col-1 text-center">
+          <h3>
+            <button mat-mini-fab color="primary" (click)="openNewForm()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </h3>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px !important">
+        <div class="col-3 d-flex align-items-center">
+          <mat-form-field>
+            <mat-label>Rubro</mat-label>
+            <input
+              matInput
+              type="text"
+              [formControl]="filtroCliente"
+              placeholder="Buscar rubro por nombre"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-1 d-flex align-items-center">
+          <button
+            (click)="applySearchFilters()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Aplicar filtros"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+
+          <button
+            (click)="clear()"
+            mat-mini-fab
+            color="primary"
+            class="m-8"
+            matTooltip="Limpiar filtros"
+          >
+            <mat-icon>cleaning_services</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="row m-4">
+        <div class="col-12 w-100 m-4">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Name Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>No. Factura</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.nombre }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="valor">
+              <th mat-header-cell *matHeaderCellDef>Valor</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                ${{ element.valor || 0 | number: '1.2-2' }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                {{ element.isActive ? 'ACTIVO' : 'INACTIVO' }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Acciones</th>
+              <td [hidden]="element.hidden" mat-cell *matCellDef="let element">
+                <div class="d-flex justify-content-center align-items-center">
+                  <button
+                    matTooltip="Editar rubro"
+                    mat-icon-button
+                    class="view-colored-button"
+                    class="m-2"
+                    (click)="openEditModal(element)"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <mat-slide-toggle
+                    color="primary"
+                    [checked]="element.isActive"
+                    (change)="updateStatus($event, element)"
+                  >
+                  </mat-slide-toggle>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <mat-paginator
+            (page)="handlePageEvent($event)"
+            [length]="length"
+            [pageSize]="pageSize"
+            [disabled]="disabled"
+            [showFirstLastButtons]="showFirstLastButtons"
+            [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+            [hidePageSize]="hidePageSize"
+            [pageIndex]="pageIndex"
+            aria-label="Select page"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

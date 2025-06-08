@@ -1,0 +1,49 @@
+<mat-card class="m-0">
+  <mat-card-content>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-5 p-0">
+        <h2 class="d-flex align-items-center">
+          <mat-icon matSuffix>block</mat-icon>
+          <span class="m-2">Anular Factura</span>
+        </h2>
+      </div>
+      <div class="col-5 text-right p-0">
+        <mat-chip color="primary">
+          <span class="font-bold">No. Factura: </span>
+          {{ factura.id }}
+        </mat-chip>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <mat-form-field appearance="outline">
+          <mat-label>Motivo de anulación</mat-label>
+          <textarea
+            matInput
+            placeholder="Escriba el motivo de anulación"
+            [(ngModel)]="motivoAnulacion"
+            rows="5"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <ng-container>
+      <div class="row justify-content-center">
+        <div class="col-10 text-center p-12">
+          <button mat-button color="" (click)="closeModal()">Cancelar</button>
+          <button
+            [disabled]="!motivoAnulacion"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            (click)="anularFactura()"
+          >
+            Anular
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

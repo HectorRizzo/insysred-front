@@ -1,0 +1,135 @@
+<mat-card>
+
+  <mat-card-content>
+
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2>Crear Contrato</h2>
+        <h3>Cliente: {{ cliente.nombres | titlecase }}</h3>
+      </div>
+    </div>
+
+    <form [formGroup]="createContractForm" class="form-field-full" >
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+
+          <mat-form-field>
+            <mat-label>Planes</mat-label>
+            <mat-select formControlName="planId">
+              <mat-option *ngFor="let plan of plans"  [value]="plan.id">{{ plan.descripcion }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+
+          <mat-form-field>
+            <mat-label>Servidor</mat-label>
+            <mat-select formControlName="servidorId">
+              <mat-option *ngFor="let servidor of servidores"  [value]="servidor.id">{{ servidor.ip }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+
+          <mat-form-field>
+            <mat-label>IP</mat-label>
+            <input formControlName="ip" matInput placeholder="_._._._" [inputMask]="ipAddressMask" required>
+          </mat-form-field>
+
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+
+          <mat-form-field>
+            <mat-label>VLAN</mat-label>
+            <mat-select >
+              <mat-option *ngFor="let servidor of servidores">{{ servidor.ip }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+
+          <mat-form-field>
+            <mat-label>IP Libres</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let servidor of servidores">{{ servidor.ip }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+
+          <mat-form-field>
+            <mat-label>MAC</mat-label>
+            <input formControlName="mac" matInput placeholder="xx-xx-xx-xx-xx-xx" [inputMask]="macAddressMask" required>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Ubicación</mat-label>
+            <input formControlName="ubicacion" matInput placeholder="ubicacion" required>
+            <mat-icon matSuffix>location</mat-icon>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Georeferencia</mat-label>
+            <input formControlName="georeferencia" matInput placeholder="Georeferencia" required>
+            <mat-icon matSuffix>language</mat-icon>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Duración de meses</mat-label>
+            <input formControlName="duracionMeses" matInput type="number" placeholder="Meses" required>
+            <mat-icon matSuffix>badge</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-10">
+          <mat-slide-toggle color="primary" formControlName="status">Estado</mat-slide-toggle>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="row justify-content-center">
+      <div class="col-10 text-center">
+        <button mat-button color="primary" (click)="closeModal()">Cancelar</button>
+        <button [disabled]="createContractForm.invalid" mat-button color="primary" type="submit" (click)="saveContract()">Guardar</button>
+      </div>
+    </div>
+    
+  </mat-card-content>
+
+</mat-card>
